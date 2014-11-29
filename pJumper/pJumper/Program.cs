@@ -56,7 +56,7 @@ namespace pJumper
             Menu.AddToMainMenu();
             Game.OnGameUpdate += Game_OnGameUpdate;
 
-            Game.PrintChat("pJumper Loaded!");
+            Game.PrintChat("pJumper Loaded - {0}", Player.ChampionName);
         }
 
         static void Game_OnGameUpdate(EventArgs args)
