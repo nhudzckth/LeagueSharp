@@ -23,6 +23,8 @@ namespace CC_Tracker
         static Font Text;
         static Font SmallText;
         static Texture HUD;
+
+        static Menu Menu;
         static void Main(string[] args)
         {
             Sprite = new Sprite(Drawing.Direct3DDevice);
@@ -43,6 +45,7 @@ namespace CC_Tracker
             try
             {
                 LoadCC();
+                LoadMenu();
                 foreach (Obj_AI_Hero hero in ObjectManager.Get<Obj_AI_Hero>().Where(hero => (CCBuffs.HasChampion(hero.ChampionName) || CCSpells.HasChampion(hero.ChampionName))))
                 {
                     CCBuff ccBuff = null;
@@ -63,6 +66,15 @@ namespace CC_Tracker
             {
                 Game.PrintChat("Exception: {0}", ex.Message);
             }
+        }
+        static void LoadMenu()
+        {
+            Menu = new Menu("CC Tracker", "ccTracker", true);
+            Menu.AddItem(new MenuItem("trackCC", "Track CC").SetValue(true));
+            Menu.AddItem(new MenuItem("drawHUD", "Draw HUD").SetValue(true));
+            Menu.AddToMainMenu();
+
+            Game.PrintChat("CC Tracker - Loaded!");
         }
 
         private static void CurrentDomainOnDomainUnload(object sender, EventArgs e)
@@ -87,7 +99,7 @@ namespace CC_Tracker
 
         static void Drawing_OnDraw(EventArgs args)
         {
-            if (Drawing.Direct3DDevice == null || Drawing.Direct3DDevice.IsDisposed)
+            if (Drawing.Direct3DDevice == null || Drawing.Direct3DDevice.IsDisposed || !Menu.Item("trackCC").GetValue<bool>())
                 return;
             try
             {
@@ -95,9 +107,12 @@ namespace CC_Tracker
                     return;
                 int startX = Drawing.Width / 2 + 210;
                 int startY = Drawing.Height / 2 + 110;
-                Sprite.Begin();
-                Sprite.Draw(HUD, new ColorBGRA(255, 255, 255, 255), null, new Vector3(-startX, -startY, 0));
-                Sprite.End();
+                if (Menu.Item("drawHUD").GetValue<bool>())
+                {
+                    Sprite.Begin();
+                    Sprite.Draw(HUD, new ColorBGRA(255, 255, 255, 255), null, new Vector3(-startX, -startY, 0));
+                    Sprite.End();
+                }
                 int newX = startX + 13;
                 int newY = startY + 25;
                 foreach (Obj_AI_Hero hero in ObjectManager.Get<Obj_AI_Hero>().Where(hero => CCHeros.HasChampion(hero.ChampionName) && hero.IsValid && hero.IsEnemy))
