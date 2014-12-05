@@ -19,6 +19,9 @@ namespace CC_Tracker
         static List<CCSpell> CCSpells = new List<CCSpell>();
         static List<CCHero> CCHeros = new List<CCHero>();
 
+        static int startX = Drawing.Width / 2 + 210;
+        static int startY = Drawing.Height / 2 + 110;
+
         static Sprite Sprite;
         static Font Text;
         static Font SmallText;
@@ -61,17 +64,43 @@ namespace CC_Tracker
                 Drawing.OnDraw += Drawing_OnDraw;
                 AppDomain.CurrentDomain.DomainUnload += CurrentDomainOnDomainUnload;
                 AppDomain.CurrentDomain.ProcessExit += CurrentDomainOnDomainUnload;
+                Game.OnWndProc += Game_OnWndProc;
             }
             catch (Exception ex)
             {
                 Game.PrintChat("Exception: {0}", ex.Message);
             }
         }
+
+        private static void Game_OnWndProc(WndEventArgs args)
+        {
+            if (args.Msg != (uint)WindowsMessages.WM_KEYDOWN)
+                return;
+
+            var key = args.WParam;
+            switch (key)
+            {
+                case 37:
+                    startX--;
+                    break;
+                case 38:
+                    startY--;
+                    break;
+                case 39:
+                    startX++;
+                    break;
+                case 40:
+                    startY++;
+                    break;
+            }
+        }
+
         static void LoadMenu()
         {
             Menu = new Menu("CC Tracker", "ccTracker", true);
             Menu.AddItem(new MenuItem("trackCC", "Track CC").SetValue(true));
             Menu.AddItem(new MenuItem("drawHUD", "Draw HUD").SetValue(true));
+            Menu.AddItem(new MenuItem("rePos", "Move HUD with arrow keys!"));
             Menu.AddToMainMenu();
 
             Game.PrintChat("CC Tracker - Loaded!");
@@ -105,8 +134,6 @@ namespace CC_Tracker
             {
                 if (Sprite.IsDisposed)
                     return;
-                int startX = Drawing.Width / 2 + 210;
-                int startY = Drawing.Height / 2 + 110;
                 if (Menu.Item("drawHUD").GetValue<bool>())
                 {
                     Sprite.Begin();
@@ -130,7 +157,7 @@ namespace CC_Tracker
                         if (buff != null)
                             Sprite.Draw(ccHero.CCBuff.BuffIcon, new ColorBGRA(255, 255, 255, 255), null, new Vector3(-newX, -newY, 0));
                         else
-                            Sprite.Draw(ccHero.CCBuff.BuffIcon, new ColorBGRA(55, 55, 55, 255), null, new Vector3(-newX, -newY, 0));
+                            Sprite.Draw(ccHero.CCBuff.BuffIcon, new ColorBGRA(255, 55, 55, 255), null, new Vector3(-newX, -newY, 0));
                         Sprite.End();
                     }
                     if (ccHero.CCSpells != null)
