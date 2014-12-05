@@ -139,9 +139,11 @@ namespace CC_Tracker
                         {
                             newX += 32 + 5;
                             string slot = spellSlot.ToString();
+                            bool canUse = (hero.Spellbook.GetSpell(spellSlot).State == SpellState.NotLearned
+                                || hero.Spellbook.GetSpell(spellSlot).State == SpellState.NoMana || hero.Spellbook.GetSpell(spellSlot).State == SpellState.Surpressed);
                             float expires = hero.Spellbook.GetSpell(spellSlot).CooldownExpires - Game.Time;
                             float smallExpires = (float) Math.Round(expires, 1);
-                            Text.DrawText(null, slot, newX, newY, expires <= 0 ? new ColorBGRA(0, 255, 0, 255) : new ColorBGRA(255, 0, 0, 255));
+                            Text.DrawText(null, slot, newX, newY, canUse ? new ColorBGRA(33, 33, 33, 255) : expires <= 0 ? new ColorBGRA(0, 255, 0, 255) : new ColorBGRA(255, 0, 0, 255));
                             if(smallExpires > 0)
                                 SmallText.DrawText(null, smallExpires.ToString(), newX, newY - 3, new ColorBGRA(0, 0, 0, 255));
                         }
@@ -169,7 +171,7 @@ namespace CC_Tracker
             CCSpells.Add(new CCSpell("Anivia", Properties.Resources.Anivia_Square_0, SpellSlot.Q));
             CCSpells.Add(new CCSpell("Ashe", Properties.Resources.Ashe_Square_0, SpellSlot.R));
             CCSpells.Add(new CCSpell("Azir", Properties.Resources.Azir_Square_0, SpellSlot.E, SpellSlot.R));
-            CCSpells.Add(new CCSpell("Blitzcrank", Properties.Resources.Blitzcrank_Square_0, SpellSlot.Q, SpellSlot.R));
+            CCSpells.Add(new CCSpell("Blitzcrank", Properties.Resources.Blitzcrank_Square_0, SpellSlot.Q, SpellSlot.E, SpellSlot.R));
             CCSpells.Add(new CCSpell("Brand", Properties.Resources.Brand_Square_0, SpellSlot.Q));
             CCSpells.Add(new CCSpell("Braum", Properties.Resources.Braum_Square_0, SpellSlot.R));
             CCSpells.Add(new CCSpell("Cho'Gath", Properties.Resources.Chogath_Square_0, SpellSlot.Q, SpellSlot.W));
