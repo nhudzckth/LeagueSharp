@@ -207,7 +207,7 @@ namespace CC_Tracker
             CCSpells.Add(new CCSpell("Draven", Properties.Resources.Draven_Square_0, SpellSlot.E));
             CCSpells.Add(new CCSpell("Braum", Properties.Resources.Braum_Square_0, SpellSlot.R));
             CCSpells.Add(new CCSpell("Elise", Properties.Resources.Elise_Square_0, SpellSlot.E));
-            CCSpells.Add(new CCSpell("Fiddlesticks", Properties.Resources.Fiddlesticks_Square_0, SpellSlot.Q, SpellSlot.E));
+            CCSpells.Add(new CCSpell("FiddleSticks", Properties.Resources.Fiddlesticks_Square_0, SpellSlot.Q, SpellSlot.E));
             CCSpells.Add(new CCSpell("Galio", Properties.Resources.Galio_Square_0, SpellSlot.R));
             CCSpells.Add(new CCSpell("Garen", Properties.Resources.Garen_Square_0, SpellSlot.Q));
             CCSpells.Add(new CCSpell("Gnar", Properties.Resources.Gnar_Square_0, SpellSlot.W, SpellSlot.R));
