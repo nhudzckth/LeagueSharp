@@ -125,7 +125,9 @@ namespace CC_Tracker
                     {
                         newX += 32 + 5;
                         Sprite.Begin();
-                        if (hero.HasBuff(ccHero.CCBuff.Name))
+                        BuffInstance buff = null;
+                        buff = hero.Buffs.First(x => x.Name == ccHero.CCBuff.Name);
+                        if (buff != null)
                             Sprite.Draw(ccHero.CCBuff.BuffIcon, new ColorBGRA(255, 255, 255, 255), null, new Vector3(-newX, -newY, 0));
                         else
                             Sprite.Draw(ccHero.CCBuff.BuffIcon, new ColorBGRA(55, 55, 55, 255), null, new Vector3(-newX, -newY, 0));
@@ -156,8 +158,8 @@ namespace CC_Tracker
 
         static void LoadCC()
         {
-            //Load CC Buffs - Disabled for the moment.
-            //CCBuffs.Add(new CCBuff("Annie", "pyromania_particle", Properties.Resources.Annie_Square_0, Properties.Resources.Annie_Passive));
+            //Load CC Buffs - Disabled for now
+            //CCBuffs.Add(new CCBuff("Annie", "pyromania", Properties.Resources.Annie_Square_0, Properties.Resources.Annie_Passive));
             //CCBuffs.Add(new CCBuff("Udyr", "UdyrBearStance", Properties.Resources.Udyr_Square_0, Properties.Resources.Udyr_BearStance));
             //Load CC Spells
             CCSpells.Add(new CCSpell("Aatrox", Properties.Resources.Aatrox_Square_0, SpellSlot.Q));
