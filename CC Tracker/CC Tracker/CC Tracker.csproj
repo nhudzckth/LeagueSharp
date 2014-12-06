@@ -80,13 +80,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Udyr_BearStance.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Aatrox_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Ahri_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Akali_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Alistar_Square_0.png" />
@@ -96,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Anivia_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Annie_Passive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Annie_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Ashe_Square_0.png" />
@@ -113,6 +119,18 @@
     <None Include="Resources\Braum_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Caitlyn_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cassiopeia_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chogath_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Corki_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Darius_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
@@ -122,13 +140,31 @@
     <None Include="Resources\Draven_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\DrMundo_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Elise_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Evelynn_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ezreal_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Fiddlesticks_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Fiora_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fizz_square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Galio_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gangplank_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Garen_Square_0.png" />
@@ -138,6 +174,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Gragas_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Graves_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Hecarim_Square_0.png" />
@@ -150,6 +189,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Janna_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JarvanIV_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Jax_Square_0.png" />
@@ -167,6 +209,30 @@
     <None Include="Resources\Karma_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Karthus_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kassadin_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Katarina_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kayle_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kennen_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Khazix_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KogMaw_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Leblanc_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\LeeSin_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +240,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Lissandra_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lucian_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Lulu_Square_0.png" />
@@ -191,7 +260,16 @@
     <None Include="Resources\Maokai_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\MasterYi_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MissFortune_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\MonkeyKing_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mordekaiser_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Morgana_Square_0.png" />
@@ -200,10 +278,22 @@
     <None Include="Resources\Nami_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Nasus_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Nautilus_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Nidalee_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Nocturne_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nunu_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Olaf_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Orianna_Square_0.png" />
@@ -213,6 +303,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Poppy_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Quinn_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Rammus_Square_0.png" />
@@ -227,10 +320,16 @@
     <None Include="Resources\Riven_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Rumble_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Ryze_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Sejuani_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shaco_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shen_Square_0.png" />
@@ -243,6 +342,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Sion_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sivir_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Skarner_Square_0.png" />
@@ -260,7 +362,13 @@
     <None Include="Resources\Syndra_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Talon_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Taric_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Teemo_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Thresh_Square_0.png" />
@@ -269,7 +377,22 @@
     <None Include="Resources\Tristana_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Trundle_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tryndamere_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\TwistedFate_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Twitch_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Udyr_BearStance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Udyr_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Urgot_Square_0.png" />
@@ -284,10 +407,16 @@
     <None Include="Resources\Veigar_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\VelKoz_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Vi_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Viktor_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vladimir_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Volibear_Square_0.png" />
@@ -305,31 +434,22 @@
     <None Include="Resources\Yasuo_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Yorick_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Zac_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zed_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Ziggs_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Zilean_Square_0.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Zyra_Square_0.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Chogath_Square_0.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\VelKoz_Square_0.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Leblanc_Square_0.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Annie_Passive.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Annie_Square_0.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Udyr_Square_0.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\CC Tracker HUD.png" />

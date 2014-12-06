@@ -83,6 +83,16 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Akali_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Akali_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Alistar_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Alistar_Square_0", resourceCulture);
@@ -183,6 +193,26 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Caitlyn_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Caitlyn_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Cassiopeia_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Cassiopeia_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CC_Tracker_HUD {
             get {
                 object obj = ResourceManager.GetObject("CC_Tracker_HUD", resourceCulture);
@@ -196,6 +226,16 @@ namespace CC_Tracker.Properties {
         internal static System.Drawing.Bitmap Chogath_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Chogath_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Corki_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Corki_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -233,9 +273,39 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DrMundo_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("DrMundo_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Elise_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Elise_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Evelynn_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Evelynn_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ezreal_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Ezreal_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -253,9 +323,39 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Fiora_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Fiora_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Fizz_square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Fizz_square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Galio_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Galio_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gangplank_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Gangplank_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -286,6 +386,16 @@ namespace CC_Tracker.Properties {
         internal static System.Drawing.Bitmap Gragas_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Gragas_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Graves_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Graves_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -326,6 +436,16 @@ namespace CC_Tracker.Properties {
         internal static System.Drawing.Bitmap Janna_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Janna_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap JarvanIV_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("JarvanIV_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -383,6 +503,76 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Karthus_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Karthus_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Kassadin_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Kassadin_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Katarina_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Katarina_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Kayle_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Kayle_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Kennen_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Kennen_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Khazix_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Khazix_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap KogMaw_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("KogMaw_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Leblanc_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Leblanc_Square_0", resourceCulture);
@@ -416,6 +606,16 @@ namespace CC_Tracker.Properties {
         internal static System.Drawing.Bitmap Lissandra_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Lissandra_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lucian_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Lucian_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -473,9 +673,39 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MasterYi_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("MasterYi_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MissFortune_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("MissFortune_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap MonkeyKing_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("MonkeyKing_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Mordekaiser_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Mordekaiser_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -503,6 +733,16 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Nasus_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Nasus_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Nautilus_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Nautilus_Square_0", resourceCulture);
@@ -513,9 +753,39 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Nidalee_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Nidalee_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Nocturne_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Nocturne_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Nunu_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Nunu_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Olaf_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Olaf_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -546,6 +816,16 @@ namespace CC_Tracker.Properties {
         internal static System.Drawing.Bitmap Poppy_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Poppy_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Quinn_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Quinn_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -593,6 +873,16 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Rumble_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Rumble_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Ryze_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Ryze_Square_0", resourceCulture);
@@ -606,6 +896,16 @@ namespace CC_Tracker.Properties {
         internal static System.Drawing.Bitmap Sejuani_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Sejuani_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Shaco_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Shaco_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -646,6 +946,16 @@ namespace CC_Tracker.Properties {
         internal static System.Drawing.Bitmap Sion_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Sion_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Sivir_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Sivir_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -703,9 +1013,29 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Talon_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Talon_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Taric_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Taric_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Teemo_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Teemo_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -733,9 +1063,39 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Trundle_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Trundle_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tryndamere_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Tryndamere_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap TwistedFate_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("TwistedFate_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Twitch_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Twitch_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -833,6 +1193,16 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Vladimir_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Vladimir_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Volibear_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Volibear_Square_0", resourceCulture);
@@ -883,6 +1253,16 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Yorick_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Yorick_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Zac_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Zac_Square_0", resourceCulture);
@@ -893,9 +1273,29 @@ namespace CC_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Zed_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Zed_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Ziggs_Square_0 {
             get {
                 object obj = ResourceManager.GetObject("Ziggs_Square_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Zilean_Square_0 {
+            get {
+                object obj = ResourceManager.GetObject("Zilean_Square_0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

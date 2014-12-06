@@ -13,14 +13,12 @@ namespace CC_Tracker
     {
         public string Champion { get; set; }
         public string Name { get; set; }
-        public Texture ChampIcon { get; set; }
         public Texture BuffIcon { get; set; }
 
-        public CCBuff(string champ, string name, Bitmap champIcon, Bitmap icon)
+        public CCBuff(string champ, string name, Bitmap icon)
         {
             this.Champion = champ;
             this.Name = name;
-            this.ChampIcon = Texture.FromMemory(Drawing.Direct3DDevice, (byte[])new ImageConverter().ConvertTo(champIcon, typeof(byte[])), 32, 32, 0, Usage.None, Format.A1, Pool.Managed, Filter.Default, Filter.Default, 0);
             this.BuffIcon = Texture.FromMemory(Drawing.Direct3DDevice, (byte[])new ImageConverter().ConvertTo(icon, typeof(byte[])), 32, 32, 0, Usage.None, Format.A1, Pool.Managed, Filter.Default, Filter.Default, 0);
         }
     }
