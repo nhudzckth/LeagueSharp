@@ -19,6 +19,8 @@ namespace PerplexedEzreal
             //Orbwalker
             Settings.AddSubMenu(new Menu("Orbwalker", "orbMenu"));
             Orbwalker = new Orbwalking.Orbwalker(Settings.SubMenu("orbMenu"));
+            //Target Selector
+            TargetSelector.AddToMenu(Settings);
             //Combo
             Settings.AddSubMenu(new Menu("Combo", "menuCombo"));
             Settings.SubMenu("menuCombo").AddItem(new MenuItem("comboQ", "Q").SetValue<bool>(true));
