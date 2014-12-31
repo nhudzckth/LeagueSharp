@@ -20,7 +20,8 @@ namespace PerplexedEzreal
             Settings.AddSubMenu(new Menu("Orbwalker", "orbMenu"));
             Orbwalker = new Orbwalking.Orbwalker(Settings.SubMenu("orbMenu"));
             //Target Selector
-            TargetSelector.AddToMenu(Settings);
+            Settings.AddSubMenu(new Menu("Target Selector", "ts"));
+            TargetSelector.AddToMenu(Settings.SubMenu("ts"));
             //Combo
             Settings.AddSubMenu(new Menu("Combo", "menuCombo"));
             Settings.SubMenu("menuCombo").AddItem(new MenuItem("comboQ", "Q").SetValue<bool>(true));
@@ -31,6 +32,9 @@ namespace PerplexedEzreal
             Settings.SubMenu("menuHarass").AddItem(new MenuItem("harassW", "W").SetValue<bool>(true));
             //Auto
             Settings.AddSubMenu(new Menu("Auto", "menuAuto"));
+            Settings.SubMenu("menuAuto").AddSubMenu(new Menu("Settings", "autoSettings"));
+            foreach(Obj_AI_Hero hero in ObjectManager.Get<Obj_AI_Hero>().Where(hero => hero.IsValid && hero.IsEnemy))
+                Settings.SubMenu("menuAuto").SubMenu("autoSettings").AddItem(new MenuItem("auto" + hero.ChampionName, hero.ChampionName).SetValue<bool>(true));
             Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoQ", "Q").SetValue<bool>(true));
             Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoW", "W").SetValue<bool>(false));
             Settings.SubMenu("menuAuto").AddItem(new MenuItem("manaR", "Save Mana For R").SetValue<bool>(true));
@@ -59,6 +63,10 @@ namespace PerplexedEzreal
         public static bool KillSteal { get { return Settings.Item("ks").GetValue<bool>(); } }
         public static int KillSteal_Range { get { return Settings.Item("ksRange").GetValue<Slider>().Value; } }
 
+        public static bool ShouldAuto(string championName)
+        {
+            return Settings.Item("auto" + championName).GetValue<bool>();
+        }
         public static bool AutoQ { get { return Settings.Item("autoQ").GetValue<bool>(); } }
         public static bool AutoW { get { return Settings.Item("autoW").GetValue<bool>(); } }
         public static bool ManaR { get { return Settings.Item("manaR").GetValue<bool>(); } }
