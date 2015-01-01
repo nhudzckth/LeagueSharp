@@ -15,16 +15,16 @@ namespace PerplexedEzreal
 
         public static float GetTotalDamage(Obj_AI_Hero target)
         {
-            double dmg = Player.GetAutoAttackDamage(target);
+            double dmg = Config.DrawAADmg ? Player.GetAutoAttackDamage(target) : 0;
 
-            if (SpellManager.Q.IsReady())
+            if (SpellManager.Q.IsReady() && Config.DrawQDmg)
                 dmg += Player.GetSpellDamage(target, SpellSlot.Q);
-            if (SpellManager.W.IsReady())
+            if (SpellManager.W.IsReady() && Config.DrawWDmg)
                 dmg += Player.GetSpellDamage(target, SpellSlot.W);
-            if (SpellManager.E.IsReady())
+            if (SpellManager.E.IsReady() && Config.DrawEDmg)
                 dmg += Player.GetSpellDamage(target, SpellSlot.E);
 
-            dmg += GetUltDamage(target);
+            dmg += Config.DrawRDmg ? GetUltDamage(target) : 0;
 
             return (float)dmg;
         }

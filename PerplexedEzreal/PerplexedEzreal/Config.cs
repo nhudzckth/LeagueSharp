@@ -37,13 +37,19 @@ namespace PerplexedEzreal
                 Settings.SubMenu("menuAuto").SubMenu("autoSettings").AddItem(new MenuItem("auto" + hero.ChampionName, hero.ChampionName).SetValue<bool>(true));
             Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoQ", "Q").SetValue<bool>(true));
             Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoW", "W").SetValue<bool>(false));
-            Settings.SubMenu("menuAuto").AddItem(new MenuItem("manaR", "Save Mana For R").SetValue<bool>(true));
+            Settings.SubMenu("menuAuto").AddItem(new MenuItem("manaER", "Save Mana For E/R").SetValue<bool>(true));
             //Kill Steal
             Settings.AddSubMenu(new Menu("Kill Steal", "menuKS"));
             Settings.SubMenu("menuKS").AddItem(new MenuItem("ks", "Kill Steal With R").SetValue<bool>(true));
             Settings.SubMenu("menuKS").AddItem(new MenuItem("ksRange", "KS Range").SetValue<Slider>(new Slider(1000, 1000, 5000)));
             //Drawing
             Settings.AddSubMenu(new Menu("Drawing", "menuDrawing"));
+            Settings.SubMenu("menuDrawing").AddSubMenu(new Menu("Damage Indicator", "menuDamage"));
+            Settings.SubMenu("menuDrawing").SubMenu("menuDamage").AddItem(new MenuItem("drawAADmg", "Draw Auto Attack Damage").SetValue<bool>(true));
+            Settings.SubMenu("menuDrawing").SubMenu("menuDamage").AddItem(new MenuItem("drawQDmg", "Draw Q Damage").SetValue<bool>(true));
+            Settings.SubMenu("menuDrawing").SubMenu("menuDamage").AddItem(new MenuItem("drawWDmg", "Draw W Damage").SetValue<bool>(true));
+            Settings.SubMenu("menuDrawing").SubMenu("menuDamage").AddItem(new MenuItem("drawEDmg", "Draw E Damage").SetValue<bool>(true));
+            Settings.SubMenu("menuDrawing").SubMenu("menuDamage").AddItem(new MenuItem("drawRDmg", "Draw R Damage").SetValue<bool>(true));
             Settings.SubMenu("menuDrawing").AddItem(new MenuItem("drawQ", "Draw Q Range").SetValue(new Circle(true, Color.Yellow)));
             Settings.SubMenu("menuDrawing").AddItem(new MenuItem("drawW", "Draw W Range").SetValue(new Circle(true, Color.Yellow)));
             Settings.SubMenu("menuDrawing").AddItem(new MenuItem("drawR", "Draw R Range").SetValue(new Circle(true, Color.Yellow)));
@@ -69,8 +75,13 @@ namespace PerplexedEzreal
         }
         public static bool AutoQ { get { return Settings.Item("autoQ").GetValue<bool>(); } }
         public static bool AutoW { get { return Settings.Item("autoW").GetValue<bool>(); } }
-        public static bool ManaR { get { return Settings.Item("manaR").GetValue<bool>(); } }
+        public static bool ManaER { get { return Settings.Item("manaER").GetValue<bool>(); } }
 
+        public static bool DrawAADmg { get { return Settings.Item("drawAADmg").GetValue<bool>(); } }
+        public static bool DrawQDmg { get { return Settings.Item("drawQDmg").GetValue<bool>(); } }
+        public static bool DrawWDmg { get { return Settings.Item("drawWDmg").GetValue<bool>(); } }
+        public static bool DrawEDmg { get { return Settings.Item("drawEDmg").GetValue<bool>(); } }
+        public static bool DrawRDmg { get { return Settings.Item("drawRDmg").GetValue<bool>(); } }
         public static bool DrawQ { get { return Settings.Item("drawQ").GetValue<Circle>().Active; } }
         public static bool DrawW { get { return Settings.Item("drawW").GetValue<Circle>().Active; } }
         public static bool DrawR { get { return Settings.Item("drawR").GetValue<Circle>().Active; } }

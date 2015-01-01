@@ -90,14 +90,14 @@ namespace PerplexedEzreal
         {
             if (Config.AutoQ && SpellManager.Q.IsReady())
             {
-                if (Config.ManaR && SpellManager.R.IsReady() && (Player.Mana - Player.Spellbook.GetSpell(SpellManager.Q.Slot).ManaCost) < Player.Spellbook.GetSpell(SpellManager.R.Slot).ManaCost)
+                if (Config.ManaER && (SpellManager.R.IsReady() || SpellManager.E.IsReady()) && ((Player.Mana - Player.Spellbook.GetSpell(SpellManager.Q.Slot).ManaCost) < Player.Spellbook.GetSpell(SpellManager.R.Slot).ManaCost) || (Player.Mana - Player.Spellbook.GetSpell(SpellManager.Q.Slot).ManaCost) < Player.Spellbook.GetSpell(SpellManager.E.Slot).ManaCost)
                     return;
                 var target = ObjectManager.Get<Obj_AI_Hero>().Where(hero => hero.IsValidTarget(SpellManager.Q.Range) && hero.IsEnemy && Config.ShouldAuto(hero.ChampionName)).FirstOrDefault();
                 SpellManager.CastSpell(SpellManager.Q, target, HitChance.High, Config.UsePackets);
             }
             if (Config.AutoW && SpellManager.W.IsReady())
             {
-                if (Config.ManaR && SpellManager.R.IsReady() && (Player.Mana - Player.Spellbook.GetSpell(SpellManager.W.Slot).ManaCost) < Player.Spellbook.GetSpell(SpellManager.R.Slot).ManaCost)
+                if (Config.ManaER && (SpellManager.R.IsReady() || SpellManager.E.IsReady()) && ((Player.Mana - Player.Spellbook.GetSpell(SpellManager.Q.Slot).ManaCost) < Player.Spellbook.GetSpell(SpellManager.R.Slot).ManaCost) || (Player.Mana - Player.Spellbook.GetSpell(SpellManager.W.Slot).ManaCost) < Player.Spellbook.GetSpell(SpellManager.E.Slot).ManaCost)
                     return;
                 var target = ObjectManager.Get<Obj_AI_Hero>().Where(hero => hero.IsValidTarget(SpellManager.W.Range) && hero.IsEnemy && Config.ShouldAuto(hero.ChampionName)).FirstOrDefault();
                 SpellManager.CastSpell(SpellManager.W, target, HitChance.High, Config.UsePackets);
