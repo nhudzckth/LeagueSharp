@@ -38,6 +38,7 @@ namespace PerplexedEzreal
             Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoQ", "Q").SetValue<bool>(true));
             Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoW", "W").SetValue<bool>(false));
             Settings.SubMenu("menuAuto").AddItem(new MenuItem("manaER", "Save Mana For E/R").SetValue<bool>(true));
+            Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoTurret", "Auto Enemy Under Turret").SetValue<bool>(false));
             //Kill Steal
             Settings.AddSubMenu(new Menu("Kill Steal", "menuKS"));
             Settings.SubMenu("menuKS").AddItem(new MenuItem("ks", "Kill Steal With R").SetValue<bool>(true));
@@ -76,6 +77,7 @@ namespace PerplexedEzreal
         public static bool AutoQ { get { return Settings.Item("autoQ").GetValue<bool>(); } }
         public static bool AutoW { get { return Settings.Item("autoW").GetValue<bool>(); } }
         public static bool ManaER { get { return Settings.Item("manaER").GetValue<bool>(); } }
+        public static bool AutoTurret { get { return Settings.Item("autoTurret").GetValue<bool>(); } }
 
         public static bool DrawAADmg { get { return Settings.Item("drawAADmg").GetValue<bool>(); } }
         public static bool DrawQDmg { get { return Settings.Item("drawQDmg").GetValue<bool>(); } }
