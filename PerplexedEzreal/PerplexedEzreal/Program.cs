@@ -150,11 +150,11 @@ namespace PerplexedEzreal
         static void Drawing_OnDraw(EventArgs args)
         {
             if (Config.DrawQ)
-                Utility.DrawCircle(Player.ServerPosition, SpellManager.Q.Range, Config.Settings.Item("drawQ").GetValue<Circle>().Color, 2);
+                Utility.DrawCircle(Player.Position, SpellManager.Q.Range, Config.Settings.Item("drawQ").GetValue<Circle>().Color);
             if (Config.DrawW)
-                Utility.DrawCircle(Player.ServerPosition, SpellManager.W.Range, Config.Settings.Item("drawW").GetValue<Circle>().Color, 2);
+                Utility.DrawCircle(Player.Position, SpellManager.W.Range, Config.Settings.Item("drawW").GetValue<Circle>().Color);
             if (Config.DrawR)
-                Utility.DrawCircle(Player.ServerPosition, Config.UltRange, Config.Settings.Item("drawR").GetValue<Circle>().Color, 2);
+                Utility.DrawCircle(Player.Position, Config.UltRange, Config.Settings.Item("drawR").GetValue<Circle>().Color);
         }
     }
 }
