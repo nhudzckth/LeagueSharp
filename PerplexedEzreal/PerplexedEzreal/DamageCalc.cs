@@ -39,7 +39,7 @@ namespace PerplexedEzreal
             float reduction = 1f - ((R.GetCollision(Player.Position.To2D(), new List<Vector2>() { target.Position.To2D() }).Count) / 10);
             reduction = reduction < 0.3f ? 0.3f : reduction;
 
-            return (float)Damage.CalcDamage(Player, target, Damage.DamageType.Magical, R.GetDamage(target) * reduction);
+            return (float)Damage.CalcDamage(Player, target, Config.DamageMode == "AD" ? Damage.DamageType.Physical : Damage.DamageType.Magical, R.GetDamage(target) * reduction);
         }
     }
 }

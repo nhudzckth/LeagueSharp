@@ -15,6 +15,7 @@ namespace PerplexedEzreal
     class Program
     {
         static Obj_AI_Hero Player = ObjectManager.Player;
+        static TargetSelector.DamageType DamageType;
         static void Main(string[] args)
         {
             CustomEvents.Game.OnGameLoad += Game_OnGameLoad;
@@ -41,8 +42,11 @@ namespace PerplexedEzreal
 
         static void Game_OnGameUpdate(EventArgs args)
         {
+            DamageType = Config.DamageMode == "AD" ? TargetSelector.DamageType.Physical : TargetSelector.DamageType.Magical;
             if (Config.RecallBlock && (Player.HasBuff("Recall") || Player.IsWindingUp))
                 return;
+            if (Config.UltLowest.Active)
+                UltLowest();
             switch (Config.Orbwalker.ActiveMode)
             {
                 case Orbwalking.OrbwalkingMode.Combo:
@@ -57,17 +61,25 @@ namespace PerplexedEzreal
             }
             KillSteal();
         }
-
+        static void UltLowest()
+        {
+            if (SpellManager.R.IsReady())
+            {
+                var target = ObjectManager.Get<Obj_AI_Hero>().Where(hero => hero.IsValidTarget(Config.UltRange) && hero.IsEnemy).OrderBy(hero => hero.Health).FirstOrDefault();
+                Game.PrintChat("Ulting lowest health target: {0}...", target.ChampionName);
+                SpellManager.CastSpell(SpellManager.R, target, HitChance.VeryHigh, Config.UsePackets);
+            }
+        }
         static void Combo()
         {
             if (Config.ComboQ && SpellManager.Q.IsReady())
             {
-                var target = TargetSelector.GetTarget(SpellManager.Q.Range, TargetSelector.DamageType.Physical);
+                var target = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType);
                 SpellManager.CastSpell(SpellManager.Q, target, HitChance.High, Config.UsePackets);
             }
             if (Config.ComboW && SpellManager.W.IsReady())
             {
-                var target = TargetSelector.GetTarget(SpellManager.W.Range, TargetSelector.DamageType.Physical);
+                var target = TargetSelector.GetTarget(SpellManager.W.Range, DamageType);
                 SpellManager.CastSpell(SpellManager.W, target, HitChance.High, Config.UsePackets);
             }
         }
@@ -76,12 +88,12 @@ namespace PerplexedEzreal
         {
             if (Config.HarassQ && SpellManager.Q.IsReady())
             {
-                var target = TargetSelector.GetTarget(SpellManager.Q.Range, TargetSelector.DamageType.Physical);
+                var target = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType);
                 SpellManager.CastSpell(SpellManager.Q, target, HitChance.High, Config.UsePackets);
             }
             if (Config.HarassW && SpellManager.W.IsReady())
             {
-                var target = TargetSelector.GetTarget(SpellManager.W.Range, TargetSelector.DamageType.Physical);
+                var target = TargetSelector.GetTarget(SpellManager.W.Range, DamageType);
                 SpellManager.CastSpell(SpellManager.W, target, HitChance.High, Config.UsePackets);
             }
         }
@@ -126,22 +138,22 @@ namespace PerplexedEzreal
         {
             if (Config.KillSteal && SpellManager.R.IsReady())
             {
-                var target = TargetSelector.GetTarget(Config.KillSteal_Range, TargetSelector.DamageType.Magical);
+                var target = TargetSelector.GetTarget(Config.UltRange, DamageType);
                 var ultDamage = DamageCalc.GetUltDamage(target);
                 var targetHealth = target.Health;
                 if (ultDamage >= targetHealth)
-                    SpellManager.CastSpell(SpellManager.R, target, HitChance.High, Config.UsePackets);
+                    SpellManager.CastSpell(SpellManager.R, target, HitChance.VeryHigh, Config.UsePackets);
             }
         }
 
         static void Drawing_OnDraw(EventArgs args)
         {
             if (Config.DrawQ)
-                Utility.DrawCircle(Player.ServerPosition, SpellManager.Q.Range, Config.Settings.Item("drawQ").GetValue<Circle>().Color, 1);
+                Utility.DrawCircle(Player.ServerPosition, SpellManager.Q.Range, Config.Settings.Item("drawQ").GetValue<Circle>().Color, 2);
             if (Config.DrawW)
-                Utility.DrawCircle(Player.ServerPosition, SpellManager.W.Range, Config.Settings.Item("drawW").GetValue<Circle>().Color, 1);
+                Utility.DrawCircle(Player.ServerPosition, SpellManager.W.Range, Config.Settings.Item("drawW").GetValue<Circle>().Color, 2);
             if (Config.DrawR)
-                Utility.DrawCircle(Player.ServerPosition, Config.KillSteal_Range, Config.Settings.Item("drawR").GetValue<Circle>().Color, 1);
+                Utility.DrawCircle(Player.ServerPosition, Config.UltRange, Config.Settings.Item("drawR").GetValue<Circle>().Color, 2);
         }
     }
 }
