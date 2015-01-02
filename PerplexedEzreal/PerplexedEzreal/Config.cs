@@ -32,6 +32,7 @@ namespace PerplexedEzreal
             Settings.SubMenu("menuHarass").AddItem(new MenuItem("harassW", "W").SetValue(true));
             //Auto
             Settings.AddSubMenu(new Menu("Auto", "menuAuto"));
+            Settings.SubMenu("menuAuto").AddItem(new MenuItem("toggleAuto", "Toggle Auto").SetValue(new KeyBind("H".ToCharArray()[0], KeyBindType.Toggle)));
             Settings.SubMenu("menuAuto").AddSubMenu(new Menu("Settings", "autoSettings"));
             foreach(Obj_AI_Hero hero in ObjectManager.Get<Obj_AI_Hero>().Where(hero => hero.IsValid && hero.IsEnemy))
                 Settings.SubMenu("menuAuto").SubMenu("autoSettings").AddItem(new MenuItem("auto" + hero.ChampionName, hero.ChampionName).SetValue(true));
@@ -73,6 +74,7 @@ namespace PerplexedEzreal
         public static bool KillSteal { get { return Settings.Item("ks").GetValue<bool>(); } }
         public static int UltRange { get { return Settings.Item("ultRange").GetValue<Slider>().Value; } }
 
+        public static KeyBind ToggleAuto { get { return Settings.Item("toggleAuto").GetValue<KeyBind>(); } }
         public static bool ShouldAuto(string championName)
         {
             return Settings.Item("auto" + championName).GetValue<bool>();

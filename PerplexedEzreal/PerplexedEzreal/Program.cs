@@ -56,7 +56,8 @@ namespace PerplexedEzreal
                     Harass();
                     break;
                 default:
-                    Auto();
+                    if(Config.ToggleAuto.Active)
+                        Auto();
                     break;
             }
             KillSteal();
