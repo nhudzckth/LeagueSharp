@@ -16,6 +16,7 @@ namespace PerplexedEzreal
     {
         static Obj_AI_Hero Player = ObjectManager.Player;
         static TargetSelector.DamageType DamageType;
+        static System.Version Version = Assembly.GetExecutingAssembly().GetName().Version;
         static void Main(string[] args)
         {
             CustomEvents.Game.OnGameLoad += Game_OnGameLoad;
@@ -25,6 +26,12 @@ namespace PerplexedEzreal
         {
             if (Player.ChampionName != "Ezreal")
                 return;
+
+            if (Updater.Outdated())
+            {
+                Game.PrintChat("<font color=\"#ff0000\">Perplexed Ezreal is outdated! Please update to {0}!</font>", Updater.GetLatestVersion());
+                return;
+            }
 
             SpellManager.Initialize();
             Config.Initialize();
@@ -37,7 +44,7 @@ namespace PerplexedEzreal
             Game.OnGameUpdate += Game_OnGameUpdate;
             Drawing.OnDraw += Drawing_OnDraw;
 
-            Game.PrintChat("<font color=\"#ff3300\">Perplexed Ezreal ({0})</font> - <font color=\"#ffffff\">Loaded!</font>", Assembly.GetExecutingAssembly().GetName().Version);
+            Game.PrintChat("<font color=\"#ff3300\">Perplexed Ezreal ({0})</font> - <font color=\"#ffffff\">Loaded!</font>", Version);
         }
 
         static void Game_OnGameUpdate(EventArgs args)
