@@ -29,10 +29,10 @@ namespace PerplexedEzreal
             SpellManager.Initialize();
             Config.Initialize();
 
-            Utility.HpBarDamageIndicator.DamageToUnit = DamageCalc.GetTotalDamage;
+            Utility.HpBarDamageIndicator.DamageToUnit = DamageCalc.GetDrawDamage;
             Utility.HpBarDamageIndicator.Enabled = true;
 
-            CustomDamageIndicator.Initialize(DamageCalc.GetTotalDamage); //Credits to Hellsing for this! Borrowed it from his Kalista assembly.
+            CustomDamageIndicator.Initialize(DamageCalc.GetDrawDamage); //Credits to Hellsing for this! Borrowed it from his Kalista assembly.
 
             Game.OnGameUpdate += Game_OnGameUpdate;
             Drawing.OnDraw += Drawing_OnDraw;
