@@ -62,6 +62,11 @@ namespace PerplexedEzreal
                 case Orbwalking.OrbwalkingMode.Mixed:
                     Harass();
                     break;
+                case Orbwalking.OrbwalkingMode.LastHit:
+                    LastHit();
+                    if (Config.ToggleAuto.Active)
+                        Auto();
+                    break;
                 default:
                     if(Config.ToggleAuto.Active)
                         Auto();
@@ -103,6 +108,30 @@ namespace PerplexedEzreal
             {
                 var target = TargetSelector.GetTarget(SpellManager.W.Range, DamageType);
                 SpellManager.CastSpell(SpellManager.W, target, HitChance.High, Config.UsePackets);
+            }
+        }
+
+        static void LastHit()
+        {
+            if (Config.LastHitQ && SpellManager.Q.IsReady())
+            {
+                var minions = MinionManager.GetMinions(Player.ServerPosition, SpellManager.Q.Range, MinionTypes.All, MinionTeam.Enemy, MinionOrderTypes.Health);
+                foreach (var minion in minions)
+                {
+                    if (!minion.IsValidTarget())
+                        continue;
+                    bool inAARange = Orbwalking.InAutoAttackRange(minion);
+                    bool aaKillable = minion.Health <= Player.GetAutoAttackDamage(minion);
+                    bool spellKillable = minion.Health <= Player.GetSpellDamage(minion, SpellManager.Q.Slot);
+                    var regardlessMobs = minions.Where(mob => mob.Health <= Player.GetAutoAttackDamage(mob));
+                    if (regardlessMobs.ToArray().Length > 1)
+                    {
+                        var regardlessMob = regardlessMobs.FirstOrDefault();
+                        SpellManager.Q.Cast(regardlessMob);
+                    }
+                    else if ((spellKillable && !aaKillable && !inAARange))
+                        SpellManager.Q.Cast(minion);
+                }
             }
         }
 

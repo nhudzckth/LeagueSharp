@@ -30,6 +30,9 @@ namespace PerplexedEzreal
             Settings.AddSubMenu(new Menu("Harass", "menuHarass"));
             Settings.SubMenu("menuHarass").AddItem(new MenuItem( "harassQ", "Q").SetValue(true));
             Settings.SubMenu("menuHarass").AddItem(new MenuItem("harassW", "W").SetValue(true));
+            //Last Hit
+            Settings.AddSubMenu(new Menu("Last Hitting", "menuLastHit"));
+            Settings.SubMenu("menuLastHit").AddItem(new MenuItem("lastHitQ", "Q").SetValue(true));
             //Auto
             Settings.AddSubMenu(new Menu("Auto", "menuAuto"));
             Settings.SubMenu("menuAuto").AddItem(new MenuItem("toggleAuto", "Toggle Auto").SetValue(new KeyBind("H".ToCharArray()[0], KeyBindType.Toggle)));
@@ -69,6 +72,8 @@ namespace PerplexedEzreal
 
         public static bool HarassQ { get { return Settings.Item("harassQ").GetValue<bool>(); } }
         public static bool HarassW { get { return Settings.Item("harassW").GetValue<bool>(); } }
+
+        public static bool LastHitQ { get { return Settings.Item("lastHitQ").GetValue<bool>(); } }
 
         public static KeyBind UltLowest { get { return Settings.Item("ultLowest").GetValue<KeyBind>(); } }
         public static bool KillSteal { get { return Settings.Item("ks").GetValue<bool>(); } }
