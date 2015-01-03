@@ -27,13 +27,14 @@ namespace PerplexedEzreal
             if (Player.ChampionName != "Ezreal")
                 return;
 
-            if (Updater.Outdated())
-            {
-                Game.PrintChat("<font color=\"#ff0000\">Perplexed Ezreal is outdated! Please update to {0}!</font>", Updater.GetLatestVersion());
-                return;
-            }
+            //if (Updater.Outdated())
+            //{
+            //    Game.PrintChat("<font color=\"#ff0000\">Perplexed Ezreal is outdated! Please update to {0}!</font>", Updater.GetLatestVersion());
+            //    return;
+            //}
 
             SpellManager.Initialize();
+            ItemManager.Initialize();
             Config.Initialize();
 
             Utility.HpBarDamageIndicator.DamageToUnit = DamageCalc.GetDrawDamage;
@@ -52,6 +53,8 @@ namespace PerplexedEzreal
             DamageType = Config.DamageMode == "AD" ? TargetSelector.DamageType.Physical : TargetSelector.DamageType.Magical;
             if (Config.RecallBlock && (Player.HasBuff("Recall") || Player.IsWindingUp))
                 return;
+            ItemManager.UseDefensiveItemsIfInDanger(0);
+            SpellManager.UseHealIfInDanger(0);
             if (Config.UltLowest.Active)
                 UltLowest();
             switch (Config.Orbwalker.ActiveMode)
@@ -73,6 +76,7 @@ namespace PerplexedEzreal
                     break;
             }
             KillSteal();
+            SpellManager.IgniteIfPossible();
         }
         static void UltLowest()
         {
@@ -85,6 +89,7 @@ namespace PerplexedEzreal
         }
         static void Combo()
         {
+            ItemManager.UseOffensiveItems();
             if (Config.ComboQ && SpellManager.Q.IsReady())
             {
                 var target = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType);

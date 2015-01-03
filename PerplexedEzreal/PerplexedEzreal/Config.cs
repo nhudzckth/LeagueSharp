@@ -35,10 +35,10 @@ namespace PerplexedEzreal
             Settings.SubMenu("menuLastHit").AddItem(new MenuItem("lastHitQ", "Q").SetValue(true));
             //Auto
             Settings.AddSubMenu(new Menu("Auto", "menuAuto"));
-            Settings.SubMenu("menuAuto").AddItem(new MenuItem("toggleAuto", "Toggle Auto").SetValue(new KeyBind("H".ToCharArray()[0], KeyBindType.Toggle)));
-            Settings.SubMenu("menuAuto").AddSubMenu(new Menu("Settings", "autoSettings"));
+            Settings.SubMenu("menuAuto").AddItem(new MenuItem("toggleAuto", "Toggle Auto").SetValue(new KeyBind("H".ToCharArray()[0], KeyBindType.Toggle, true)));
+            Settings.SubMenu("menuAuto").AddSubMenu(new Menu("Champions", "autoChamps"));
             foreach(Obj_AI_Hero hero in ObjectManager.Get<Obj_AI_Hero>().Where(hero => hero.IsValid && hero.IsEnemy))
-                Settings.SubMenu("menuAuto").SubMenu("autoSettings").AddItem(new MenuItem("auto" + hero.ChampionName, hero.ChampionName).SetValue(true));
+                Settings.SubMenu("menuAuto").SubMenu("autoChamps").AddItem(new MenuItem("auto" + hero.ChampionName, hero.ChampionName).SetValue(true));
             Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoQ", "Q").SetValue(true));
             Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoW", "W").SetValue<bool>(false));
             Settings.SubMenu("menuAuto").AddItem(new MenuItem("manaER", "Save Mana For E/R").SetValue(true));
@@ -48,6 +48,29 @@ namespace PerplexedEzreal
             Settings.SubMenu("menuUlt").AddItem(new MenuItem("ultLowest", "Ult Lowest Target").SetValue(new KeyBind("T".ToCharArray()[0], KeyBindType.Press)));
             Settings.SubMenu("menuUlt").AddItem(new MenuItem("ks", "Kill Steal With R").SetValue(true));
             Settings.SubMenu("menuUlt").AddItem(new MenuItem("ultRange", "Ult Range").SetValue<Slider>(new Slider(1000, 1000, 5000)));
+            //Summoners
+            Settings.AddSubMenu(new Menu("Summoners", "menuSumms"));
+            Settings.SubMenu("menuSumms").AddSubMenu(new Menu("Heal", "summHeal"));
+            Settings.SubMenu("menuSumms").SubMenu("summHeal").AddItem(new MenuItem("useHeal", "Enabled").SetValue(true));
+            Settings.SubMenu("menuSumms").SubMenu("summHeal").AddItem(new MenuItem("healPct", "Use On % Health").SetValue(new Slider(35, 10, 90)));
+            Settings.SubMenu("menuSumms").AddSubMenu(new Menu("Ignite", "summIgnite"));
+            Settings.SubMenu("menuSumms").SubMenu("summIgnite").AddItem(new MenuItem("useIgnite", "Enabled").SetValue(true));
+            Settings.SubMenu("menuSumms").SubMenu("summIgnite").AddItem(new MenuItem("igniteMode", "Use Ignite For").SetValue(new StringList(new string[] { "Execution", "Combo" })));
+            //Items
+            Settings.AddSubMenu(new Menu("Items", "menuItems"));
+            Settings.SubMenu("menuItems").AddSubMenu(new Menu("Offensive", "offItems"));
+            foreach (var offItem in ItemManager.Items.Where(item => item.Type == ItemType.Offensive))
+                Settings.SubMenu("menuItems").SubMenu("offItems").AddItem(new MenuItem("use" + offItem.ShortName, offItem.Name).SetValue(true));
+            Settings.SubMenu("menuItems").AddSubMenu(new Menu("Defensive", "defItems"));
+            foreach (var defItem in ItemManager.Items.Where(item => item.Type == ItemType.Defensive))
+            {
+                Settings.SubMenu("menuItems").SubMenu("defItems").AddSubMenu(new Menu(defItem.Name, "menu" + defItem.ShortName));
+                Settings.SubMenu("menuItems").SubMenu("defItems").SubMenu("menu" + defItem.ShortName).AddItem(new MenuItem("use" + defItem.ShortName, "Enable").SetValue(true));
+                Settings.SubMenu("menuItems").SubMenu("defItems").SubMenu("menu" + defItem.ShortName).AddItem(new MenuItem("pctHealth" + defItem.ShortName, "Use On % Health").SetValue(new Slider(35, 10, 90)));
+            }
+            Settings.SubMenu("menuItems").AddSubMenu(new Menu("Cleanse", "cleanseItems"));
+            foreach (var cleanseItem in ItemManager.Items.Where(item => item.Type == ItemType.Cleanse))
+                Settings.SubMenu("menuItems").SubMenu("cleanseItems").AddItem(new MenuItem("use" + cleanseItem.ShortName, cleanseItem.Name).SetValue(true));
             //Drawing
             Settings.AddSubMenu(new Menu("Drawing", "menuDrawing"));
             Settings.SubMenu("menuDrawing").AddSubMenu(new Menu("Damage Indicator", "menuDamage"));
@@ -88,6 +111,20 @@ namespace PerplexedEzreal
         public static bool AutoW { get { return Settings.Item("autoW").GetValue<bool>(); } }
         public static bool ManaER { get { return Settings.Item("manaER").GetValue<bool>(); } }
         public static bool AutoTurret { get { return Settings.Item("autoTurret").GetValue<bool>(); } }
+
+        public static bool UseHeal { get { return Settings.Item("useHeal").GetValue<bool>(); } }
+        public static int HealPct { get { return Settings.Item("healPct").GetValue<Slider>().Value; } }
+        public static bool UseIgnite { get { return Settings.Item("useIgnite").GetValue<bool>(); } }
+        public static string IgniteMode { get { return Settings.Item("igniteMode").GetValue<StringList>().SelectedValue; } }
+
+        public static bool ShouldUseItem(string shortName)
+        {
+            return Settings.Item("use" + shortName).GetValue<bool>();
+        }
+        public static int UseOnPercent(string shortName)
+        {
+            return Settings.Item("pctHealth" + shortName).GetValue<Slider>().Value;
+        }
 
         public static bool DrawAADmg { get { return Settings.Item("drawAADmg").GetValue<bool>(); } }
         public static bool DrawQDmg { get { return Settings.Item("drawQDmg").GetValue<bool>(); } }

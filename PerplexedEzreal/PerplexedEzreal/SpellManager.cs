@@ -10,6 +10,8 @@ namespace PerplexedEzreal
 {
     class SpellManager
     {
+        private static Obj_AI_Hero Player = ObjectManager.Player;
+
         private static Spell _Q, _W, _E, _R;
 
         public static Spell Q { get { return _Q; } }
@@ -36,6 +38,43 @@ namespace PerplexedEzreal
             Obj_AI_Hero Player = ObjectManager.Player;
             if (target.IsValidTarget(spell.Range) && spell.GetPrediction(target).Hitchance >= hitChance)
                 spell.Cast(target, packetCast);
+        }
+
+        public static void UseHealIfInDanger(double incomingDmg)
+        {
+            if (Config.UseHeal)
+            {
+                int healthToUse = (int)(Player.MaxHealth / 100) * Config.HealPct;
+                if ((Player.Health - incomingDmg) <= healthToUse)
+                {
+                    SpellSlot healSlot = Utility.GetSpellSlot(Player, "SummonerHeal");
+                    if(healSlot != SpellSlot.Unknown)
+                        Player.Spellbook.CastSpell(healSlot);
+                }
+            }
+        }
+
+        internal static void IgniteIfPossible()
+        {
+            if (Config.UseIgnite)
+            {
+                SpellSlot igniteSlot = Utility.GetSpellSlot(Player, "SummonerDot");
+                if (igniteSlot != SpellSlot.Unknown)
+                {
+                    var targets = ObjectManager.Get<Obj_AI_Hero>().Where(hero => hero.IsValidTarget(600) && hero.IsEnemy);
+                    foreach (var target in targets)
+                    {
+                        if (Config.IgniteMode == "Combo")
+                            Player.Spellbook.CastSpell(igniteSlot, target);
+                        else
+                        {
+                            double igniteDamage = Damage.GetSummonerSpellDamage(Player, target, Damage.SummonerSpell.Ignite);
+                            if (target.Health < igniteDamage)
+                                Player.Spellbook.CastSpell(igniteSlot, target);
+                        }
+                    }
+                }
+            }
         }
     }
 }
