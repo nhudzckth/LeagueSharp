@@ -27,11 +27,11 @@ namespace PerplexedEzreal
             if (Player.ChampionName != "Ezreal")
                 return;
 
-            //if (Updater.Outdated())
-            //{
-            //    Game.PrintChat("<font color=\"#ff0000\">Perplexed Ezreal is outdated! Please update to {0}!</font>", Updater.GetLatestVersion());
-            //    return;
-            //}
+            if (Updater.Outdated())
+            {
+                Game.PrintChat("<font color=\"#ff0000\">Perplexed Ezreal is outdated! Please update to {0}!</font>", Updater.GetLatestVersion());
+                return;
+            }
 
             SpellManager.Initialize();
             ItemManager.Initialize();
