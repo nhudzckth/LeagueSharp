@@ -44,8 +44,21 @@ namespace PerplexedEzreal
 
             Game.OnGameUpdate += Game_OnGameUpdate;
             Drawing.OnDraw += Drawing_OnDraw;
+            Orbwalking.AfterAttack += Orbwalking_AfterAttack;
 
             Game.PrintChat("<font color=\"#ff3300\">Perplexed Ezreal ({0})</font> - <font color=\"#ffffff\">Loaded!</font>", Version);
+        }
+
+        static void Orbwalking_AfterAttack(AttackableUnit unit, AttackableUnit target)
+        {
+            if ((Config.Orbwalker.ActiveMode == Orbwalking.OrbwalkingMode.LastHit || Config.Orbwalker.ActiveMode == Orbwalking.OrbwalkingMode.LaneClear) && Config.LastHitQ)
+            {
+                foreach (var minionDie in MinionManager.GetMinions(SpellManager.Q.Range).Where(minion => target.NetworkId != minion.NetworkId && minion.IsEnemy && HealthPrediction.GetHealthPrediction(minion, (int)((Player.AttackDelay * 1000) * 2.65f + Game.Ping / 2), 0) <= 0 && SpellManager.Q.GetDamage(minion) >= minion.Health))
+                {
+                    if (SpellManager.Q.IsReady())
+                        SpellManager.CastSpell(SpellManager.Q, minionDie, HitChance.High, Config.UsePackets);
+                }
+            }
         }
 
         static void Game_OnGameUpdate(EventArgs args)
@@ -126,15 +139,8 @@ namespace PerplexedEzreal
                     if (!minion.IsValidTarget())
                         continue;
                     bool inAARange = Orbwalking.InAutoAttackRange(minion);
-                    bool aaKillable = minion.Health <= Player.GetAutoAttackDamage(minion);
                     bool spellKillable = minion.Health <= Player.GetSpellDamage(minion, SpellManager.Q.Slot);
-                    var regardlessMobs = minions.Where(mob => mob.Health <= Player.GetAutoAttackDamage(mob));
-                    if (regardlessMobs.ToArray().Length > 1)
-                    {
-                        var regardlessMob = regardlessMobs.FirstOrDefault();
-                        SpellManager.Q.Cast(regardlessMob);
-                    }
-                    else if ((spellKillable && !aaKillable && !inAARange))
+                    if ((spellKillable && !inAARange))
                         SpellManager.Q.Cast(minion);
                 }
             }
