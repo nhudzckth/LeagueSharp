@@ -64,7 +64,7 @@ namespace PerplexedEzreal
                     var targets = ObjectManager.Get<Obj_AI_Hero>().Where(hero => hero.IsValidTarget(600) && hero.IsEnemy);
                     foreach (var target in targets)
                     {
-                        if (Config.IgniteMode == "Combo")
+                        if (Config.IgniteMode == "Combo" && Config.Orbwalker.ActiveMode == Orbwalking.OrbwalkingMode.Combo)
                             Player.Spellbook.CastSpell(igniteSlot, target);
                         else
                         {
