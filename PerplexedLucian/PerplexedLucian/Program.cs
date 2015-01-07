@@ -74,12 +74,8 @@ namespace PerplexedLucian
                 }
                 target = TargetSelector.GetTarget(SpellManager.Q2.Range, TargetSelector.DamageType.Physical);
                 var collisions = SpellManager.Q2.GetPrediction(target).CollisionObjects;
-                if (collisions.Count > 0)
-                {
-                    SpellManager.CastSpell(SpellManager.Q2, collisions[0], Config.UsePackets);
-                    if (Config.CheckPassive)
-                        return;
-                }
+                foreach (Obj_AI_Base collision in collisions)
+                    SpellManager.CastSpell(SpellManager.Q2, collision, Config.UsePackets);
             }
             if (Config.ComboW && SpellManager.W.IsReady())
             {
@@ -148,12 +144,8 @@ namespace PerplexedLucian
                 }
                 target = TargetSelector.GetTarget(SpellManager.Q2.Range, TargetSelector.DamageType.Physical);
                 var collisions = SpellManager.Q2.GetPrediction(target).CollisionObjects;
-                if (collisions.Count > 0)
-                {
-                    SpellManager.CastSpell(SpellManager.Q2, collisions[0], Config.UsePackets);
-                    if (Config.CheckPassive)
-                        return;
-                }
+                foreach (Obj_AI_Base collision in collisions)
+                    SpellManager.CastSpell(SpellManager.Q2, collision, Config.UsePackets);
             }
         }
 
