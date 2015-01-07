@@ -48,7 +48,7 @@ namespace PerplexedLucian
             SpellManager.UseHealIfInDanger(0);
             SpellManager.IgniteIfPossible();
             ItemManager.CleanseCC();
-            switch(Config.Orbwalker.ActiveMode)
+            switch (Config.Orbwalker.ActiveMode)
             {
                 case Orbwalking.OrbwalkingMode.Combo:
                     Combo();
@@ -69,13 +69,13 @@ namespace PerplexedLucian
                 if (target != null)
                 {
                     SpellManager.CastSpell(SpellManager.Q, target, Config.UsePackets);
-                    if(Config.CheckPassive)
+                    if (Config.CheckPassive)
                         return;
                 }
                 target = TargetSelector.GetTarget(SpellManager.Q2.Range, TargetSelector.DamageType.Physical);
-                var collisions = SpellManager.Q2.GetPrediction(target).CollisionObjects;
+                var collisions = SpellManager.Q2.GetCollision(Player.ServerPosition.To2D(), new List<Vector2>() { target.ServerPosition.To2D() });
                 foreach (Obj_AI_Base collision in collisions)
-                    SpellManager.CastSpell(SpellManager.Q2, collision, Config.UsePackets);
+                    SpellManager.CastSpell(SpellManager.Q, collision, Config.UsePackets);
             }
             if (Config.ComboW && SpellManager.W.IsReady())
             {
@@ -104,7 +104,7 @@ namespace PerplexedLucian
             }
             if (Config.ComboE && SpellManager.E.IsReady())
             {
-                float range = 500 + SpellManager.E.Range;
+                float range = Player.AttackRange + SpellManager.E.Range;
                 var target = TargetSelector.GetTarget(range, TargetSelector.DamageType.Physical);
                 if (target != null && target.IsValidTarget(range))
                 {
@@ -143,9 +143,9 @@ namespace PerplexedLucian
                         return;
                 }
                 target = TargetSelector.GetTarget(SpellManager.Q2.Range, TargetSelector.DamageType.Physical);
-                var collisions = SpellManager.Q2.GetPrediction(target).CollisionObjects;
+                var collisions = SpellManager.Q2.GetCollision(Player.ServerPosition.To2D(), new List<Vector2>() { target.ServerPosition.To2D() });
                 foreach (Obj_AI_Base collision in collisions)
-                    SpellManager.CastSpell(SpellManager.Q2, collision, Config.UsePackets);
+                    SpellManager.CastSpell(SpellManager.Q, collision, Config.UsePackets);
             }
         }
 
@@ -153,7 +153,7 @@ namespace PerplexedLucian
         {
             if (Config.DrawQ.Active)
                 Render.Circle.DrawCircle(Player.Position, SpellManager.Q.Range, Config.DrawQ.Color);
-            if(Config.DrawQ2.Active)
+            if (Config.DrawQ2.Active)
                 Render.Circle.DrawCircle(Player.Position, SpellManager.Q2.Range, Config.DrawQ2.Color);
             if (Config.DrawW.Active)
                 Render.Circle.DrawCircle(Player.Position, SpellManager.W.Range, Config.DrawW.Color);
