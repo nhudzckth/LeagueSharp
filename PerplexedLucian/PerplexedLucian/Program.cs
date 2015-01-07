@@ -153,6 +153,8 @@ namespace PerplexedLucian
         {
             if (Config.DrawQ.Active)
                 Render.Circle.DrawCircle(Player.Position, SpellManager.Q.Range, Config.DrawQ.Color);
+            if(Config.DrawQ2.Active)
+                Render.Circle.DrawCircle(Player.Position, SpellManager.Q2.Range, Config.DrawQ2.Color);
             if (Config.DrawW.Active)
                 Render.Circle.DrawCircle(Player.Position, SpellManager.W.Range, Config.DrawW.Color);
             if (Config.DrawE.Active)
