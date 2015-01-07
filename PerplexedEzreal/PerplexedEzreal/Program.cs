@@ -76,7 +76,7 @@ namespace PerplexedEzreal
                     Harass();
                     break;
                 case Orbwalking.OrbwalkingMode.LastHit:
-                    LastHit();
+                    //LastHit(); - Disabled for now.
                     if (Config.ToggleAuto.Active)
                         Auto();
                     break;
