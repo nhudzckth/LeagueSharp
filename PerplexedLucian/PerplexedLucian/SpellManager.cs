@@ -21,6 +21,8 @@ namespace PerplexedLucian
         public static Spell E { get { return _E; } }
         public static Spell R { get { return _R; } }
 
+        public static float LastCastTime = 0f;
+
         public static void Initialize()
         {
             _Q = new Spell(SpellSlot.Q, 675);
@@ -43,18 +45,25 @@ namespace PerplexedLucian
         {
             Obj_AI_Hero Player = ObjectManager.Player;
             if (target.IsValidTarget(spell.Range) && spell.GetPrediction(target).Hitchance >= hitChance)
+            {
                 spell.Cast(target, packetCast);
+                LastCastTime = Environment.TickCount;
+            }
         }
 
         public static void CastSpell(Spell spell, Vector3 position, bool packetCast)
         {
             spell.Cast(position, packetCast);
+            LastCastTime = Environment.TickCount;
         }
 
         public static void CastSpell(Spell spell, Obj_AI_Base target, bool packetCast)
         {
             if (target.IsValidTarget(spell.Range))
+            {
                 spell.Cast(target, packetCast);
+                LastCastTime = Environment.TickCount;
+            }
         }
 
         public static void UseHealIfInDanger(double incomingDmg)

@@ -133,7 +133,7 @@ namespace PerplexedLucian
         {
             if (HasPassive && Config.CheckPassive)
                 return;
-            if (Config.ComboQ && SpellManager.Q.IsReady())
+            if (Config.HarassQ && SpellManager.Q.IsReady())
             {
                 var target = TargetSelector.GetTarget(SpellManager.Q.Range, TargetSelector.DamageType.Physical);
                 if (target != null)
@@ -165,7 +165,7 @@ namespace PerplexedLucian
 
         private static bool HasPassive
         {
-            get { return Player.HasLucianPassive(); }
+            get { return ((Environment.TickCount - SpellManager.LastCastTime) < 3000) || Player.HasLucianPassive(); }
         }
     }
 }
