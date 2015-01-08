@@ -39,8 +39,15 @@ namespace PerplexedLucian
 
             Game.OnGameUpdate += Game_OnGameUpdate;
             Drawing.OnDraw += Drawing_OnDraw;
+            Orbwalking.AfterAttack += Orbwalking_AfterAttack;
 
             Game.PrintChat("<font color=\"#ff3300\">Perplexed Lucian ({0})</font> - <font color=\"#ffffff\">Loaded!</font>", Version);
+        }
+
+        static void Orbwalking_AfterAttack(AttackableUnit unit, AttackableUnit target)
+        {
+            if (HasPassive)
+                SpellManager.LastCastTime = 0;
         }
 
         static void Game_OnGameUpdate(EventArgs args)
@@ -54,6 +61,7 @@ namespace PerplexedLucian
                     Combo();
                     break;
                 case Orbwalking.OrbwalkingMode.Mixed:
+                    Harass();
                     break;
             }
         }
@@ -86,12 +94,13 @@ namespace PerplexedLucian
                     switch (prediction.Hitchance)
                     {
                         case HitChance.High:
+                        case HitChance.VeryHigh:
                             SpellManager.CastSpell(SpellManager.W, target, Config.UsePackets);
                             if (Config.CheckPassive)
                                 return;
                             break;
                         case HitChance.Collision:
-                            var collisions = prediction.CollisionObjects.Where(collision => collision.Distance(target) <= 100).ToList();
+                            var collisions = prediction.CollisionObjects.Where(collision => collision.Distance(target) <= SpellManager.W.Width).ToList();
                             if (collisions.Count > 0)
                             {
                                 SpellManager.CastSpell(SpellManager.W, collisions[0], Config.UsePackets);
@@ -165,7 +174,15 @@ namespace PerplexedLucian
 
         private static bool HasPassive
         {
-            get { return ((Environment.TickCount - SpellManager.LastCastTime) < 3000) || Player.HasLucianPassive(); }
+            get
+            {
+                if (Environment.TickCount - SpellManager.LastCastTime < 3000)
+                    return true;
+                else if (Player.HasLucianPassive())
+                    return true;
+                else
+                    return false;
+            }
         }
     }
 }
