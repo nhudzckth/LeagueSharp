@@ -55,6 +55,8 @@ namespace PerplexedLucian
             SpellManager.UseHealIfInDanger(0);
             SpellManager.IgniteIfPossible();
             ItemManager.CleanseCC();
+            if (Player.IsChannelingImportantSpell())
+                return;
             switch (Config.Orbwalker.ActiveMode)
             {
                 case Orbwalking.OrbwalkingMode.Combo:
@@ -117,9 +119,12 @@ namespace PerplexedLucian
                 var target = TargetSelector.GetTarget(range, TargetSelector.DamageType.Physical);
                 if (target != null && target.IsValidTarget(range))
                 {
-                    SpellManager.CastSpell(SpellManager.E, Game.CursorPos, Config.UsePackets);
-                    if (Config.CheckPassive)
-                        return;
+                    if (Config.EIntoTurret || (!Config.EIntoTurret && !target.UnderTurret(true)))
+                    {
+                        SpellManager.CastSpell(SpellManager.E, Game.CursorPos, Config.UsePackets);
+                        if (Config.CheckPassive)
+                            return;
+                    }
                 }
             }
 

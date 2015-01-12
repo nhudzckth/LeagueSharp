@@ -48,6 +48,7 @@ namespace PerplexedLucian
             {
                 spell.Cast(target, packetCast);
                 LastCastTime = Environment.TickCount;
+                Orbwalking.ResetAutoAttackTimer();
             }
         }
 
@@ -55,6 +56,7 @@ namespace PerplexedLucian
         {
             spell.Cast(position, packetCast);
             LastCastTime = Environment.TickCount;
+            Orbwalking.ResetAutoAttackTimer();
         }
 
         public static void CastSpell(Spell spell, Obj_AI_Base target, bool packetCast)
@@ -63,6 +65,7 @@ namespace PerplexedLucian
             {
                 spell.Cast(target, packetCast);
                 LastCastTime = Environment.TickCount;
+                Orbwalking.ResetAutoAttackTimer();
             }
         }
 
@@ -71,7 +74,7 @@ namespace PerplexedLucian
             if (Config.UseHeal)
             {
                 int healthToUse = (int)(Player.MaxHealth / 100) * Config.HealPct;
-                if ((Player.Health - incomingDmg) <= healthToUse)
+                if ((Player.Health - incomingDmg) <= healthToUse && !Player.InFountain())
                 {
                     SpellSlot healSlot = Utility.GetSpellSlot(Player, "SummonerHeal");
                     if(healSlot != SpellSlot.Unknown)

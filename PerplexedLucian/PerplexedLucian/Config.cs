@@ -28,6 +28,7 @@ namespace PerplexedLucian
             Settings.SubMenu("menuCombo").AddItem(new MenuItem("comboW", "W").SetValue(true));
             Settings.SubMenu("menuCombo").AddItem(new MenuItem("comboE", "E").SetValue(true));
             Settings.SubMenu("menuCombo").AddItem(new MenuItem("comboR", "R").SetValue(true));
+            Settings.SubMenu("menuCombo").AddItem(new MenuItem("eIntoTurret", "E Into Turret").SetValue(true));
             //Harass
             Settings.AddSubMenu(new Menu("Harass", "menuHarass"));
             Settings.SubMenu("menuHarass").AddItem(new MenuItem( "harassQ", "Q").SetValue(true));
@@ -70,6 +71,7 @@ namespace PerplexedLucian
         public static bool ComboW { get { return Settings.Item("comboW").GetValue<bool>(); } }
         public static bool ComboE { get { return Settings.Item("comboE").GetValue<bool>(); } }
         public static bool ComboR { get { return Settings.Item("comboR").GetValue<bool>(); } }
+        public static bool EIntoTurret { get { return Settings.Item("eIntoTurret").GetValue<bool>(); } }
 
         public static bool HarassQ { get { return Settings.Item("harassQ").GetValue<bool>(); } }
 
