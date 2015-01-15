@@ -17,7 +17,7 @@ namespace PerplexedLucian
             //Offensive
             Items.Add(new Item("Cutlass", "Bilgewater Cutlass", 3144, ItemType.Offensive, 450));
             Items.Add(new Item("BORK", "BORK", 3153, ItemType.Offensive, 450));
-            Items.Add(new Item("Ghostblade", "Youmuu's Ghostblade", 3142, ItemType.Offensive));
+            Items.Add(new Item("Ghostblade", "Youmuu's Ghostblade", 3142, ItemType.Offensive, Player.AttackRange));
             //Cleanse
             Items.Add(new Item("QSS", "Quicksilver Sash", 3140, ItemType.Cleanse));
             Items.Add(new Item("Mercurial", "Mercurial Scimitar", 3139, ItemType.Cleanse));
