@@ -52,7 +52,8 @@ namespace PerplexedLucian
                 if (item.Type == ItemType.Offensive)
                 {
                     var target = TargetSelector.GetTarget(item.Range, TargetSelector.DamageType.Magical);
-                    item.Use(target);
+                    if(target.IsValidTarget(item.Range))
+                        item.Use(target);
                 }
             }
         }
