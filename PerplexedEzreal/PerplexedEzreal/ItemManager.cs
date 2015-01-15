@@ -17,7 +17,7 @@ namespace PerplexedEzreal
             //Offensive
             Items.Add(new Item("Cutlass", "Bilgewater Cutlass", 3144, ItemType.Offensive, 450));
             Items.Add(new Item("BORK", "BORK", 3153, ItemType.Offensive, 450));
-            Items.Add(new Item("Ghostblade", "Youmuu's Ghostblade", 3142, ItemType.Offensive));
+            Items.Add(new Item("Ghostblade", "Youmuu's Ghostblade", 3142, ItemType.Offensive, Player.AttackRange));
             Items.Add(new Item("Gunblade", "Hextech Gunblade", 3146, ItemType.Offensive, 700));
             Items.Add(new Item("DFG", "Deathfire Grasp", 3128, ItemType.Offensive, 750));
             //Defensive
@@ -69,7 +69,8 @@ namespace PerplexedEzreal
                 if (item.Type == ItemType.Offensive)
                 {
                     var target = TargetSelector.GetTarget(item.Range, TargetSelector.DamageType.Magical);
-                    item.Use(target);
+                    if(target.IsValidTarget(item.Range))
+                        item.Use(target);
                 }
             }
         }
