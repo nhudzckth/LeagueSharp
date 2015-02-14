@@ -135,6 +135,7 @@ namespace PerplexedNidalee
             switch (Config.Orbwalker.ActiveMode)
             {
                 case Orbwalking.OrbwalkingMode.Combo:
+                    ItemManager.UseOffensiveItems();
                     Combo();
                     break;
                 case Orbwalking.OrbwalkingMode.Mixed:
