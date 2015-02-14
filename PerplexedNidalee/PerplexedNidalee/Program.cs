@@ -175,7 +175,7 @@ namespace PerplexedNidalee
         static void Combo()
         {
             var target = TargetSelector.GetSelectedTarget();
-            if(target == null || target.IsValidTarget(SpellManager.Javelin.Range))
+            if(target == null || !target.IsValidTarget(SpellManager.Javelin.Range))
                 target =  TargetSelector.GetTarget(SpellManager.Javelin.Range, TargetSelector.DamageType.Magical);
             if (!target.IsValidTarget(SpellManager.Javelin.Range))
                 return;
@@ -225,7 +225,7 @@ namespace PerplexedNidalee
         static void Harass()
         {
             var target = TargetSelector.GetSelectedTarget();
-            if (target == null || target.IsValidTarget(SpellManager.Javelin.Range))
+            if (target == null || !target.IsValidTarget(SpellManager.Javelin.Range))
                 target = TargetSelector.GetTarget(SpellManager.Javelin.Range, TargetSelector.DamageType.Magical);
             if (!target.IsValidTarget(SpellManager.Javelin.Range))
                 return;
