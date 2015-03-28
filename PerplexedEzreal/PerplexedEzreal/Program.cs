@@ -42,7 +42,7 @@ namespace PerplexedEzreal
 
             CustomDamageIndicator.Initialize(DamageCalc.GetDrawDamage); //Credits to Hellsing for this! Borrowed it from his Kalista assembly.
 
-            Game.OnGameUpdate += Game_OnGameUpdate;
+            Game.OnUpdate += Game_OnGameUpdate;
             Drawing.OnDraw += Drawing_OnDraw;
             Orbwalking.AfterAttack += Orbwalking_AfterAttack;
             AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
@@ -203,11 +203,11 @@ namespace PerplexedEzreal
         static void Drawing_OnDraw(EventArgs args)
         {
             if (Config.DrawQ)
-                Utility.DrawCircle(Player.Position, SpellManager.Q.Range, Config.Settings.Item("drawQ").GetValue<Circle>().Color);
+                Render.Circle.DrawCircle(Player.Position, SpellManager.Q.Range, Config.Settings.Item("drawQ").GetValue<Circle>().Color);
             if (Config.DrawW)
-                Utility.DrawCircle(Player.Position, SpellManager.W.Range, Config.Settings.Item("drawW").GetValue<Circle>().Color);
+                Render.Circle.DrawCircle(Player.Position, SpellManager.W.Range, Config.Settings.Item("drawW").GetValue<Circle>().Color);
             if (Config.DrawR)
-                Utility.DrawCircle(Player.Position, Config.UltRange, Config.Settings.Item("drawR").GetValue<Circle>().Color);
+                Render.Circle.DrawCircle(Player.Position, Config.UltRange, Config.Settings.Item("drawR").GetValue<Circle>().Color);
         }
     }
 }
