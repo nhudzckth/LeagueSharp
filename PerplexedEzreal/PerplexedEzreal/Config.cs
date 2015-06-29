@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using LeagueSharp;
 using LeagueSharp.Common;
 using Color = System.Drawing.Color;
+using DetuksSharp;
 
 namespace PerplexedEzreal
 {
     class Config
     {
         public static Menu Settings = new Menu("Perplexed Ezreal", "menu", true);
-        public static Orbwalking.Orbwalker Orbwalker;
 
         public static string[] Marksmen = { "Kalista", "Jinx", "Lucian", "Quinn", "Draven",  "Varus", "Graves", "Vayne", "Caitlyn",
                                                                     "Urgot", "Ezreal", "KogMaw", "Ashe", "MissFortune", "Tristana", "Teemo", "Sivir",
@@ -21,8 +21,10 @@ namespace PerplexedEzreal
         public static void Initialize()
         {
             //Orbwalker
-            Settings.AddSubMenu(new Menu("Orbwalker", "orbMenu"));
-            Orbwalker = new Orbwalking.Orbwalker(Settings.SubMenu("orbMenu"));
+            Menu orbMenu = new Menu("Orbwalker", "orbMenu");
+            Settings.AddSubMenu(orbMenu);
+            DeathWalker.AddToMenu(orbMenu);
+            //Orbwalker = new Orbwalking.Orbwalker(Settings.SubMenu("orbMenu"));
             //Target Selector
             Settings.AddSubMenu(new Menu("Target Selector", "ts"));
             TargetSelector.AddToMenu(Settings.SubMenu("ts"));

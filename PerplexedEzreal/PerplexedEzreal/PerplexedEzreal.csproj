@@ -63,6 +63,12 @@
     <Compile Include="CustomDamageIndicator.cs" />
     <Compile Include="DamageCalc.cs" />
     <Compile Include="ItemManager.cs" />
+    <Compile Include="Orbwalker\DeathDraw.cs" />
+    <Compile Include="Orbwalker\DeathMath.cs" />
+    <Compile Include="Orbwalker\DeathWalker.cs" />
+    <Compile Include="Orbwalker\Prediction\HealthDeath.cs" />
+    <Compile Include="Orbwalker\Prediction\TargetSpell.cs" />
+    <Compile Include="Orbwalker\Prediction\TargetSpellDatabase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpellManager.cs" />
