@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using LeagueSharp;
 using LeagueSharp.Common;
 using Color = System.Drawing.Color;
-using DetuksSharp;
 
 namespace PerplexedEzreal
 {
@@ -18,13 +17,13 @@ namespace PerplexedEzreal
                                                                     "Urgot", "Ezreal", "KogMaw", "Ashe", "MissFortune", "Tristana", "Teemo", "Sivir",
                                                                     "Twitch", "Corki"};
 
+        public static Orbwalking.Orbwalker Orbwalker;
+
         public static void Initialize()
         {
             //Orbwalker
             Menu orbMenu = new Menu("Orbwalker", "orbMenu");
-            Settings.AddSubMenu(orbMenu);
-            DeathWalker.AddToMenu(orbMenu);
-            //Orbwalker = new Orbwalking.Orbwalker(Settings.SubMenu("orbMenu"));
+            Orbwalker = new Orbwalking.Orbwalker(Settings.SubMenu("orbMenu"));
             //Target Selector
             Settings.AddSubMenu(new Menu("Target Selector", "ts"));
             TargetSelector.AddToMenu(Settings.SubMenu("ts"));

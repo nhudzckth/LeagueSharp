@@ -9,7 +9,6 @@ using LeagueSharp.Common;
 using SharpDX;
 using System.Reflection;
 using System.Diagnostics;
-using DetuksSharp;
 
 namespace PerplexedEzreal
 {
@@ -45,7 +44,7 @@ namespace PerplexedEzreal
 
             Game.OnUpdate += Game_OnGameUpdate;
             Drawing.OnDraw += Drawing_OnDraw;
-            DeathWalker.AfterAttack += Orbwalking_AfterAttack;
+            Orbwalking.AfterAttack += Orbwalking_AfterAttack;
             AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
 
             Game.PrintChat("<font color=\"#ff3300\">Perplexed Ezreal ({0})</font> - <font color=\"#ffffff\">Loaded!</font>", Version);
@@ -61,7 +60,7 @@ namespace PerplexedEzreal
 
         static void Orbwalking_AfterAttack(AttackableUnit unit, AttackableUnit target)
         {
-            if ((DeathWalker.CurrentMode == DeathWalker.Mode.Lasthit || DeathWalker.CurrentMode == DeathWalker.Mode.LaneClear) && Config.LastHitQ)
+            if ((Config.Orbwalker.ActiveMode == Orbwalking.OrbwalkingMode.LastHit || Config.Orbwalker.ActiveMode == Orbwalking.OrbwalkingMode.LaneClear) && Config.LastHitQ)
             {
                 foreach (var minionDie in MinionManager.GetMinions(SpellManager.Q.Range).Where(minion => target.NetworkId != minion.NetworkId && minion.IsEnemy && HealthPrediction.GetHealthPrediction(minion, (int)((Player.AttackDelay * 1000) * 2.65f  + Game.Ping / 2), 0) <= 0 && SpellManager.Q.GetDamage(minion) >= minion.Health && SpellManager.Q.IsReady()))
                     SpellManager.CastSpell(SpellManager.Q, minionDie, HitChance.High, Config.UsePackets);
@@ -77,15 +76,15 @@ namespace PerplexedEzreal
             SpellManager.UseHealIfInDanger(0);
             if (Config.UltLowest.Active)
                 UltLowest();
-            switch (DeathWalker.CurrentMode)
+            switch (Config.Orbwalker.ActiveMode)
             {
-                case DeathWalker.Mode.Combo:
+                case Orbwalking.OrbwalkingMode.Combo:
                     Combo();
                     break;
-                case DeathWalker.Mode.Harass:
+                case Orbwalking.OrbwalkingMode.Mixed:
                     Harass();
                     break;
-                case DeathWalker.Mode.Lasthit:
+                case Orbwalking.OrbwalkingMode.LastHit:
                     LastHit();
                     if (Config.ToggleAuto.Active)
                         Auto();
