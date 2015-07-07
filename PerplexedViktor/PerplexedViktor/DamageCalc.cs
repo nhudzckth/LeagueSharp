@@ -52,7 +52,7 @@ namespace PerplexedViktor
 
         public static bool RemainingUltCanKill(Obj_AI_Base target)
         {
-            return target.Health > GetRemainingUltDamage(target);
+            return target.Health < GetRemainingUltDamage(target);
         }
 
         public static float GetUltInitialDamage(Obj_AI_Base target)
