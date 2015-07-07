@@ -120,6 +120,6 @@ namespace PerplexedViktor
         public static bool DrawQ { get { return Settings.Item("drawQ").GetValue<Circle>().Active; } }
         public static bool DrawW { get { return Settings.Item("drawW").GetValue<Circle>().Active; } }
         public static bool DrawE { get { return Settings.Item("drawE").GetValue<Circle>().Active; } }
-        public static bool DrawR { get { return Settings.Item("drawE").GetValue<Circle>().Active; } }
+        public static bool DrawR { get { return Settings.Item("drawR").GetValue<Circle>().Active; } }
     }
 }
