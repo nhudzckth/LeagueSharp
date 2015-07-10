@@ -1,22 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Color = System.Drawing.Color;
 using LeagueSharp;
 using LeagueSharp.Common;
-using SharpDX;
-using System.Reflection;
-using System.Diagnostics;
 
 namespace PerplexedEzreal
 {
     class Program
     {
         static Obj_AI_Hero Player = ObjectManager.Player;
-        static TargetSelector.DamageType DamageType;
-        static System.Version Version = Assembly.GetExecutingAssembly().GetName().Version;
         static void Main(string[] args)
         {
             CustomEvents.Game.OnGameLoad += Game_OnGameLoad;
@@ -27,27 +18,14 @@ namespace PerplexedEzreal
             if (Player.ChampionName != "Ezreal")
                 return;
 
-            if (Updater.Outdated())
-            {
-                Game.PrintChat("<font color=\"#ff0000\">Perplexed Ezreal is outdated! Please update to {0}!</font>", Updater.GetLatestVersion());
-                return;
-            }
-
             SpellManager.Initialize();
-            ItemManager.Initialize();
             Config.Initialize();
 
-            Utility.HpBarDamageIndicator.DamageToUnit = DamageCalc.GetDrawDamage;
-            Utility.HpBarDamageIndicator.Enabled = true;
-
-            CustomDamageIndicator.Initialize(DamageCalc.GetDrawDamage); //Credits to Hellsing for this! Borrowed it from his Kalista assembly.
-
-            Game.OnUpdate += Game_OnGameUpdate;
+            Game.OnUpdate += Game_OnUpdate;
             Drawing.OnDraw += Drawing_OnDraw;
             Orbwalking.AfterAttack += Orbwalking_AfterAttack;
             AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
 
-            Game.PrintChat("<font color=\"#ff3300\">Perplexed Ezreal ({0})</font> - <font color=\"#ffffff\">Loaded!</font>", Version);
         }
 
         static void AntiGapcloser_OnEnemyGapcloser(ActiveGapcloser gapcloser)
@@ -55,27 +33,37 @@ namespace PerplexedEzreal
             if (!Config.GapcloseE)
                 return;
             var awayPosition = gapcloser.End.Extend(ObjectManager.Player.ServerPosition, ObjectManager.Player.Distance(gapcloser.End) + SpellManager.E.Range);
-                SpellManager.CastSpell(SpellManager.E, awayPosition, false);
+            SpellManager.E.Cast(awayPosition);
         }
 
         static void Orbwalking_AfterAttack(AttackableUnit unit, AttackableUnit target)
         {
             if ((Config.Orbwalker.ActiveMode == Orbwalking.OrbwalkingMode.LastHit || Config.Orbwalker.ActiveMode == Orbwalking.OrbwalkingMode.LaneClear) && Config.LastHitQ)
             {
-                foreach (var minionDie in MinionManager.GetMinions(SpellManager.Q.Range).Where(minion => target.NetworkId != minion.NetworkId && minion.IsEnemy && HealthPrediction.GetHealthPrediction(minion, (int)((Player.AttackDelay * 1000) * 2.65f  + Game.Ping / 2), 0) <= 0 && SpellManager.Q.GetDamage(minion) >= minion.Health && SpellManager.Q.IsReady()))
-                    SpellManager.CastSpell(SpellManager.Q, minionDie, HitChance.High, Config.UsePackets);
+                foreach (
+                    var minionDie in
+                        MinionManager.GetMinions(SpellManager.Q.Range)
+                            .Where(
+                                minion =>
+                                    target.NetworkId != minion.NetworkId && minion.IsEnemy &&
+                                    HealthPrediction.GetHealthPrediction(minion,
+                                        (int) ((Player.AttackDelay*1000)*2.65f + Game.Ping/2), 0) <= 0 &&
+                                    SpellManager.Q.GetDamage(minion) >= minion.Health && SpellManager.Q.IsReady()))
+                    SpellManager.CastSpell(SpellManager.Q, minionDie, HitChance.High);
             }
         }
 
-        static void Game_OnGameUpdate(EventArgs args)
+        static void Game_OnUpdate(EventArgs args)
         {
-            DamageType = Config.DamageMode == "AD" ? TargetSelector.DamageType.Physical : TargetSelector.DamageType.Magical;
-            if (Config.RecallBlock && (Player.HasBuff("Recall") || Player.IsWindingUp))
+            if (Player.IsDead || Player.IsRecalling() || args == null)
                 return;
-            ItemManager.UseDefensiveItemsIfInDanger(0);
-            SpellManager.UseHealIfInDanger(0);
+
             if (Config.UltLowest.Active)
-                UltLowest();
+                UltLowestTarget();
+
+            AutoHarass();
+            Killsteal();
+
             switch (Config.Orbwalker.ActiveMode)
             {
                 case Orbwalking.OrbwalkingMode.Combo:
@@ -86,117 +74,137 @@ namespace PerplexedEzreal
                     break;
                 case Orbwalking.OrbwalkingMode.LastHit:
                     LastHit();
-                    if (Config.ToggleAuto.Active)
-                        Auto();
                     break;
-                default:
-                    if(Config.ToggleAuto.Active)
-                        Auto();
+                case Orbwalking.OrbwalkingMode.LaneClear:
+                    LaneClear();
                     break;
             }
-            KillSteal();
-            SpellManager.IgniteIfPossible();
         }
-        static void UltLowest()
-        {
-            if (SpellManager.R.IsReady())
-            {
-                var target = ObjectManager.Get<Obj_AI_Hero>().Where(hero => hero.IsValidTarget(Config.UltRange) && hero.IsEnemy).OrderBy(hero => hero.Health).FirstOrDefault();
-                Game.PrintChat("Ulting lowest health target: {0}...", target.ChampionName);
-                SpellManager.CastSpell(SpellManager.R, target, HitChance.VeryHigh, Config.UsePackets);
-            }
-        }
+
         static void Combo()
         {
-            ItemManager.UseOffensiveItems();
-            if (Config.ComboQ && SpellManager.Q.IsReady())
+            if (SpellManager.Q.IsReady() && Config.ComboQ)
             {
-                var target = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType);
-                SpellManager.CastSpell(SpellManager.Q, target, HitChance.High, Config.UsePackets);
+                var t = TargetSelector.GetTarget(SpellManager.Q.Range, TargetSelector.DamageType.Physical);
+                if (t != null)
+                    SpellManager.CastSpell(SpellManager.Q, t, HitChance.High);
             }
-            if (Config.ComboW && SpellManager.W.IsReady())
+
+            if (SpellManager.W.IsReady() && Config.ComboW)
             {
-                var target = TargetSelector.GetTarget(SpellManager.W.Range, DamageType);
-                SpellManager.CastSpell(SpellManager.W, target, HitChance.High, Config.UsePackets);
+                var t = TargetSelector.GetTarget(SpellManager.W.Range, TargetSelector.DamageType.Magical);
+                if (t != null)
+                    SpellManager.CastSpell(SpellManager.W, t, HitChance.High);
+            }
+
+            if (SpellManager.R.IsReady() && Config.ComboR)
+            {
+                foreach (var t in HeroManager.Enemies.Where(hero => hero.IsValidTarget(Config.UltMaxRange)))
+                {
+                    SpellManager.R.CastIfWillHit(t, Config.ComboRHit);
+                    return;
+                }
+            }
+
+            if (SpellManager.R.IsReady() && Config.ComboR)
+            {
+                var t = TargetSelector.GetTarget(Config.UltMaxRange, TargetSelector.DamageType.Physical);
+                if (t != null)
+                {
+                    if (Player.Distance(t) > Config.UltMinRange && t.Health < DamageCalc.GetRDamage(t))
+                        SpellManager.CastSpell(SpellManager.R, t, HitChance.High);
+                }
             }
         }
 
         static void Harass()
         {
-            if (Config.HarassQ && SpellManager.Q.IsReady())
+            if (Player.ManaPercent < Config.HarassMana)
+                return;
+
+            if (SpellManager.Q.IsReady() && Config.HarassQ)
             {
-                var target = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType);
-                SpellManager.CastSpell(SpellManager.Q, target, HitChance.High, Config.UsePackets);
+                var t = TargetSelector.GetTarget(SpellManager.Q.Range, TargetSelector.DamageType.Physical);
+                if (t != null)
+                    SpellManager.CastSpell(SpellManager.Q, t, HitChance.High);
             }
-            if (Config.HarassW && SpellManager.W.IsReady())
+
+            if (SpellManager.W.IsReady() && Config.HarassW)
             {
-                var target = TargetSelector.GetTarget(SpellManager.W.Range, DamageType);
-                SpellManager.CastSpell(SpellManager.W, target, HitChance.High, Config.UsePackets);
+                var t = TargetSelector.GetTarget(SpellManager.W.Range, TargetSelector.DamageType.Magical);
+                if (t != null)
+                    SpellManager.CastSpell(SpellManager.W, t, HitChance.High);
+            }
+        }
+
+        static void AutoHarass()
+        {
+            if (!Config.ToggleAuto.Active)
+                return;
+            if (SpellManager.Q.IsReady() && Config.AutoQ)
+            {
+                var t =
+                    HeroManager.Enemies.Where(hero => hero.IsValidTarget(SpellManager.Q.Range))
+                        .FirstOrDefault(hero => Config.ShouldAuto(hero.ChampionName));
+                if (t != null)
+                    SpellManager.CastSpell(SpellManager.W, t, HitChance.High);
             }
         }
 
         static void LastHit()
         {
-            if (Config.LastHitQ && SpellManager.Q.IsReady())
+            if (SpellManager.Q.IsReady() && Config.LastHitQ)
             {
-                var minions = MinionManager.GetMinions(Player.ServerPosition, SpellManager.Q.Range, MinionTypes.All, MinionTeam.Enemy, MinionOrderTypes.Health);
-                foreach (var minion in minions)
-                {
-                    if (!minion.IsValidTarget())
-                        continue;
-                    bool inAARange = Orbwalking.InAutoAttackRange(minion);
-                    bool spellKillable = minion.Health <= Player.GetSpellDamage(minion, SpellManager.Q.Slot);
-                    if ((spellKillable && !inAARange))
-                        SpellManager.Q.Cast(minion);
-                }
+                var minion =
+                    MinionManager.GetMinions(SpellManager.Q.Range, MinionTypes.All, MinionTeam.Enemy)
+                        .FirstOrDefault(
+                            min =>
+                                min.IsValidTarget(SpellManager.Q.Range) &&
+                                Player.GetSpellDamage(min, SpellSlot.Q) >= min.Health);
+                if (minion != null)
+                    SpellManager.CastSpell(SpellManager.Q, minion, HitChance.High);
             }
         }
 
-        static void Auto()
+        static void LaneClear()
         {
-            if (Config.AutoQ && SpellManager.Q.IsReady())
+            if (Player.ManaPercent < Config.ClearMana)
+                return;
+
+            if (SpellManager.Q.IsReady() && Config.LaneClearQ)
             {
-                if (Config.ManaER && (SpellManager.R.IsReady() || SpellManager.E.IsReady()) && ((Player.Mana - Player.Spellbook.GetSpell(SpellManager.Q.Slot).ManaCost) < Player.Spellbook.GetSpell(SpellManager.R.Slot).ManaCost) || (Player.Mana - Player.Spellbook.GetSpell(SpellManager.Q.Slot).ManaCost) < Player.Spellbook.GetSpell(SpellManager.E.Slot).ManaCost)
-                    return;
-                var target = ObjectManager.Get<Obj_AI_Hero>().Where(hero => hero.IsValidTarget(SpellManager.Q.Range) && hero.IsEnemy && Config.ShouldAuto(hero.ChampionName)).FirstOrDefault();
-                bool bothUnderTurret = target.UnderTurret(true) && Player.UnderTurret(true);
-                if (bothUnderTurret)
-                {
-                    if (Config.AutoTurret)
-                        SpellManager.CastSpell(SpellManager.Q, target, HitChance.High, Config.UsePackets);
-                    else
-                        return;
-                }
-                else
-                    SpellManager.CastSpell(SpellManager.Q, target, HitChance.High, Config.UsePackets);
-            }
-            if (Config.AutoW && SpellManager.W.IsReady())
-            {
-                if (Config.ManaER && (SpellManager.R.IsReady() || SpellManager.E.IsReady()) && ((Player.Mana - Player.Spellbook.GetSpell(SpellManager.W.Slot).ManaCost) < Player.Spellbook.GetSpell(SpellManager.R.Slot).ManaCost) || (Player.Mana - Player.Spellbook.GetSpell(SpellManager.W.Slot).ManaCost) < Player.Spellbook.GetSpell(SpellManager.E.Slot).ManaCost)
-                    return;
-                var target = ObjectManager.Get<Obj_AI_Hero>().Where(hero => hero.IsValidTarget(SpellManager.W.Range) && hero.IsEnemy && Config.ShouldAuto(hero.ChampionName)).FirstOrDefault();
-                bool bothUnderTurret = target.UnderTurret(true) && Player.UnderTurret(true);
-                if (bothUnderTurret)
-                {
-                    if (Config.AutoTurret)
-                        SpellManager.CastSpell(SpellManager.W, target, HitChance.High, Config.UsePackets);
-                    else
-                        return;
-                }
-                else
-                    SpellManager.CastSpell(SpellManager.W, target, HitChance.High, Config.UsePackets);
+                var minion =
+                    MinionManager.GetMinions(SpellManager.Q.Range, MinionTypes.All, MinionTeam.Enemy,
+                        MinionOrderTypes.MaxHealth).FirstOrDefault(min => min.IsValidTarget(SpellManager.Q.Range));
+                if (minion != null)
+                    SpellManager.CastSpell(SpellManager.Q, minion, HitChance.High);
             }
         }
 
-        static void KillSteal()
+        static void UltLowestTarget()
         {
-            if (Config.KillSteal && SpellManager.R.IsReady())
+            if (SpellManager.R.IsReady())
             {
-                var target = TargetSelector.GetTarget(Config.UltRange, DamageType);
-                var ultDamage = DamageCalc.GetUltDamage(target);
-                var targetHealth = target.Health;
-                if (ultDamage >= targetHealth && !target.IsValidTarget(Player.AttackRange))
-                    SpellManager.CastSpell(SpellManager.R, target, HitChance.VeryHigh, Config.UsePackets);
+                var t =
+                    HeroManager.Enemies.Where(hero => hero.IsValidTarget(Config.UltMaxRange))
+                        .OrderBy(hero => hero.Health)
+                        .FirstOrDefault();
+                if (t != null)
+                    SpellManager.CastSpell(SpellManager.R, t, HitChance.High);
+            }
+        }
+
+        static void Killsteal()
+        {
+            if (SpellManager.R.IsReady() && Config.Killsteal)
+            {
+                var t =
+                    HeroManager.Enemies.FirstOrDefault(
+                        hero =>
+                            hero.IsValidTarget(Config.UltMaxRange) && Player.Distance(hero) > Config.UltMinRange &&
+                            hero.Health < DamageCalc.GetRDamage(hero));
+                if (t != null)
+                    SpellManager.CastSpell(SpellManager.R, t, HitChance.High);
             }
         }
 
@@ -206,8 +214,10 @@ namespace PerplexedEzreal
                 Render.Circle.DrawCircle(Player.Position, SpellManager.Q.Range, Config.Settings.Item("drawQ").GetValue<Circle>().Color);
             if (Config.DrawW)
                 Render.Circle.DrawCircle(Player.Position, SpellManager.W.Range, Config.Settings.Item("drawW").GetValue<Circle>().Color);
-            if (Config.DrawR)
-                Render.Circle.DrawCircle(Player.Position, Config.UltRange, Config.Settings.Item("drawR").GetValue<Circle>().Color);
+            if (Config.DrawMinR)
+                Render.Circle.DrawCircle(Player.Position, Config.UltMinRange, Config.Settings.Item("drawMinR").GetValue<Circle>().Color);
+            if (Config.DrawMaxR)
+                Render.Circle.DrawCircle(Player.Position, Config.UltMaxRange, Config.Settings.Item("drawMaxR").GetValue<Circle>().Color);
         }
     }
 }
