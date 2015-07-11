@@ -175,7 +175,9 @@ namespace PerplexedEzreal
             {
                 var minion =
                     MinionManager.GetMinions(SpellManager.Q.Range, MinionTypes.All, MinionTeam.Enemy,
-                        MinionOrderTypes.MaxHealth).FirstOrDefault(min => min.IsValidTarget(SpellManager.Q.Range));
+                        MinionOrderTypes.MaxHealth)
+                        .OrderBy(min => min.Distance(Player))
+                        .FirstOrDefault(min => min.IsValidTarget(SpellManager.Q.Range));
                 if (minion != null)
                     SpellManager.CastSpell(SpellManager.Q, minion, HitChance.High);
             }
