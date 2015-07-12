@@ -147,7 +147,7 @@ namespace PerplexedEzreal
                     HeroManager.Enemies.Where(hero => hero.IsValidTarget(SpellManager.Q.Range))
                         .FirstOrDefault(hero => Config.ShouldAuto(hero.ChampionName));
                 if (t != null)
-                    SpellManager.CastSpell(SpellManager.W, t, HitChance.High);
+                    SpellManager.CastSpell(SpellManager.Q, t, HitChance.High);
             }
         }
 
