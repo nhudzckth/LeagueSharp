@@ -149,6 +149,14 @@ namespace PerplexedEzreal
                 if (t != null)
                     SpellManager.CastSpell(SpellManager.Q, t, HitChance.High);
             }
+            if (SpellManager.W.IsReady() && Config.AutoW)
+            {
+                var t =
+                    HeroManager.Enemies.Where(hero => hero.IsValidTarget(SpellManager.W.Range))
+                        .FirstOrDefault(hero => Config.ShouldAuto(hero.ChampionName));
+                if (t != null)
+                    SpellManager.CastSpell(SpellManager.W, t, HitChance.High);
+            }
         }
 
         static void LastHit()
