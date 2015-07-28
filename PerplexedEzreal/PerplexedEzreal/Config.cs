@@ -50,7 +50,7 @@ namespace PerplexedEzreal
                         Settings.SubMenu("menuAuto").SubMenu("autoChamps").AddItem(new MenuItem("auto" + hero.ChampionName, hero.ChampionName).SetValue(Marksmen.Contains(hero.ChampionName)));
                     Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoQ", "Q").SetValue(true));
                     Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoW", "W").SetValue(false));
-                    Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoMana", "Mana % >= ").SetValue(true));
+                    Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoMana", "Mana % >= ").SetValue(new Slider(30, 1, 99)));
                     Settings.SubMenu("menuAuto").AddItem(new MenuItem("autoTurret", "Harass Enemy Under Turret").SetValue(false));
                 }
             }

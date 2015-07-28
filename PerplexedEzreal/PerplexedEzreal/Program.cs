@@ -2,6 +2,7 @@
 using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
+using ItemData = LeagueSharp.Common.Data.ItemData;
 
 namespace PerplexedEzreal
 {
@@ -17,7 +18,6 @@ namespace PerplexedEzreal
         {
             if (Player.ChampionName != "Ezreal")
                 return;
-
             SpellManager.Initialize();
             Config.Initialize();
 
